@@ -1,6 +1,6 @@
 import React from "react";
 import HomeBuildingsAnimation from "../../assets/HomeBuildingsAnimation.json";
-import Typical from 'react-typical'
+import Typical from "react-typical";
 
 import Lottie from "lottie-react";
 import {
@@ -22,9 +22,10 @@ const Home = () => {
     fontSize: "0.8rem",
     "@media(min-width:800px)": { fontSize: "4rem" },
   };
-  theme.typography.h4 ={
-    marginTop:'10rem'
-  }
+  theme.typography.h4 = {
+    marginTop: "10rem",
+    fontSize: "2rem",
+  };
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2}>
@@ -46,14 +47,16 @@ const Home = () => {
               Your Convenience, <br />
               Our Priority
             </Typography>
-            <Typography variant="h4">
-              Click Here To {' '}
-              <Typical  loop={Infinity} wrapper="i" steps={[
-                'Get Started',1000,
-                'Register Yourself',1000
-              ]}/>
-            </Typography>
-           
+            <a href="#" style={{ color: "#3A98B9" }}>
+              <Typography variant="h4">
+                Click Here To{" "}
+                <Typical
+                  loop={Infinity}
+                  wrapper="i"
+                  steps={["Get Started", 1000, "Register Yourself", 1000]}
+                />
+              </Typography>
+            </a>
           </ThemeProvider>
         </Grid>
       </Grid>
