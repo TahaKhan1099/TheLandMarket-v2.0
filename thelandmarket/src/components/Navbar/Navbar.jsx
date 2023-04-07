@@ -17,7 +17,7 @@ const Navbar = () => {
             <Tab label="Dashboards" sx={{color:'#000000', fontFamily:'Poppins', fontSize:'1.2rem', marginTop:'0.5rem', '&:hover':{textDecoration:'underline #3A98B9'}}}/>
             <Tab label="Societies" sx={{color:'#000000', fontFamily:'Poppins', fontSize:'1.2rem', marginTop:'0.5rem', '&:hover':{textDecoration:'underline #3A98B9'}}}/>
           </Tabs>
-          <Button sx={{backgroundColor:'#ffffff', color:'#3A98B9', border:' 1px solid #3A98B9', '&:hover':{color:'#ffffff', backgroundColor:'#3A98B9'}}}>LOG IN</Button>
+          <Button sx={{backgroundColor:'#ffffff', fontFamily:'Poppins' ,color:'#3A98B9', border:' 1px solid #3A98B9', '&:hover':{color:'#ffffff', backgroundColor:'#3A98B9'}}}>LOG IN</Button>
         </Toolbar>
       </AppBar>
     </>
