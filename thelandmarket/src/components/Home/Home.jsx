@@ -70,12 +70,12 @@ const Home = () => {
               sx={{
                 margin: "auto",
                 fontFamily: "Poppins",
-                backgroundColor: "#ffffff",
-                color: "#3A98B9",
+                backgroundColor: "#3A98B9",
+                color: "#ffffff",
                 fontSize: "1rem",
                 width: "15rem",
                 border: " 1px solid #3A98B9",
-                "&:hover": { color: "#ffffff", backgroundColor: "#3A98B9" },
+                "&:hover": { color: "#3A98B9", backgroundColor: "#ffffff" },
                 "@media(max-width: 800px)": {
                   width: "3rem",
                   fontSize: "0.5rem",
@@ -88,30 +88,36 @@ const Home = () => {
           </Box>
         </Grid>
       </Grid>
-      <Typography variant="h2" mt="150px" align="center">
+      <Box>
+        <Typography variant="h3" sx={{textAlign:'center', mt: '10rem'}}>Our Popular Residence</Typography>
+        
+      </Box>
+      <Typography variant="h4" mt="150px" align="center">
         How it Works?
       </Typography>
-      <Stack
-        direction={{ xs: "column", sm: "row" }}
-        spacing={{ xs: 1, sm: 2, md: 4 }}
-      >
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-      </Stack>
-      <Grid
-        item
-        xs={6}
+      <Box
         sx={{
-          width: "200px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           marginTop: "8rem",
-          "@media(min-width: 800px)": {
-            width: "200px",
-          },
         }}
       >
-        <Lottie animationData={ArrowAnimation3} />
-      </Grid>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: 1, sm: 1, md: 4 }}
+        >
+          <Item sx={{ width: "10rem", height: "10rem" }}>Item 1</Item>
+          <Grid item xs={6} sx={{ width: "8rem", height: "10rem" }}>
+            <Lottie animationData={ArrowAnimation3} />
+          </Grid>
+          <Item sx={{ width: "10rem", height: "10rem" }}>Item 2</Item>
+          <Grid item xs={6} sx={{ width: "8rem", height: "10rem", transform: 'rotate(90deg)' }}>
+            <Lottie animationData={ArrowAnimation3} />
+          </Grid>
+          <Item sx={{ width: "10rem", height: "10rem" }}>Item 3</Item>
+        </Stack>
+      </Box>
     </Container>
   );
 };
