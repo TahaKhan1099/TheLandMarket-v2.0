@@ -11,6 +11,9 @@ import {
   Container,
   Button,
 } from "@mui/material";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -62,7 +65,7 @@ const Home = () => {
               Our Priority
             </Typography>
             <Typography variant="h4" align="center">
-              Click Here To Register Yourslef
+              Click Here To Register Yourself
             </Typography>
           </ThemeProvider>
           <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
@@ -107,15 +110,39 @@ const Home = () => {
           direction={{ xs: "column", sm: "row" }}
           spacing={{ xs: 1, sm: 1, md: 4 }}
         >
-          <Item sx={{ width: "10rem", height: "10rem" }}>Item 1</Item>
+          <Item sx={{ width: "10rem", height: "auto" }}>
+            <Card sx={{border: "none", boxShadow: "none"}}>
+              <CardMedia component="img" image="/src/assets/images/logoNew.PNG"/>
+              <CardContent >
+                <Typography variant="h9" gutterBottom component="div">Search</Typography>
+                <Typography variant="body2">Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum </Typography>
+              </CardContent>
+            </Card>
+          </Item>
           <Grid item xs={6} sx={{ width: "8rem", height: "10rem" }}>
             <Lottie animationData={ArrowAnimation3} />
           </Grid>
-          <Item sx={{ width: "10rem", height: "10rem" }}>Item 2</Item>
+          <Item sx={{ width: "10rem", height: "auto" }}>
+          <Card sx={{border: "none", boxShadow: "none"}}>
+              <CardMedia component="img" image="/src/assets/images/logoNew.PNG"/>
+              <CardContent >
+                <Typography variant="h9" gutterBottom component="div">Search</Typography>
+                <Typography variant="body2">Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum </Typography>
+              </CardContent>
+            </Card>
+          </Item>
           <Grid item xs={6} sx={{ width: "8rem", height: "10rem", transform: 'rotate(90deg)' }}>
             <Lottie animationData={ArrowAnimation3} />
           </Grid>
-          <Item sx={{ width: "10rem", height: "10rem" }}>Item 3</Item>
+          <Item sx={{ width: "10rem", height: "auto" }}>
+          <Card sx={{border: "none", boxShadow: "none"}}>
+              <CardMedia component="img" image="/src/assets/images/logoNew.PNG"/>
+              <CardContent >
+                <Typography variant="h9" gutterBottom component="div">Search</Typography>
+                <Typography variant="body2">Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum </Typography>
+              </CardContent>
+            </Card>
+          </Item>
         </Stack>
       </Box>
     </Container>
