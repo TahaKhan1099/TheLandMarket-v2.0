@@ -108,7 +108,7 @@ const Home = () => {
       >
         <Stack
           direction={{ xs: "column", sm: "row" }}
-          spacing={{ xs: 1, sm: 1, md: 4 }}
+          spacing={{ xs: 1, sm: 2, md: 4 }}
         >
           <Item sx={{ width: "10rem", height: "auto" }}>
             <Card sx={{border: "none", boxShadow: "none"}}>
