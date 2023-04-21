@@ -6,22 +6,25 @@ import About from "./components/About/About";
 import Discover from "./components/Discover/Discover";
 import Dashboards from "./components/Dashboards/Dashboards";
 import Societies from "./components/Societies/Societies";
+import DealerLogin from "./components/DealerLogin/DealerLogin";
+import SocietyLogin from "./components/SocietyLogin/SocietyLogin";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />}/>
-          <Route path="/discover" element={<Discover />}/>
-          <Route path="/dashboards" element={<Dashboards />}/>
-          <Route path="/societies" element={<Societies />}/>
-        </Routes>
+        <Navbar/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/discover" element={<Discover />} />
+            <Route path="/dashboards" element={<Dashboards />} />
+            <Route path="/societies" element={<Societies />} />
+            <Route path="/dealerLogin" element={<DealerLogin />} />
+            <Route path="/societyLogin" element={<SocietyLogin />} />
+          </Routes>
+      
         <Footer />
-  
       </BrowserRouter>
     </>
   );
