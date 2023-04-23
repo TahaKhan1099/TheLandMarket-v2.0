@@ -1,8 +1,11 @@
+import { Container } from '@mui/material'
 import React from 'react'
 
 function Dashboards() {
   return (
-    <div>Dashboards</div>
+    <Container maxWidth="xl">
+      
+    </Container>
   )
 }
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   AppBar,
   Typography,
@@ -32,7 +31,7 @@ const style = {
 const Navbar = () => {
   const [value, setValue] = useState();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -51,12 +50,12 @@ const Navbar = () => {
   const NTSocieties = () => {
     navigate("/societies");
   };
-  const NTDealerLogin = () =>{
-    navigate("/dealerLogin")
-  }
-  const NTSocietyLogin = () =>{
-    navigate("/societyLogin")
-  }
+  const NTDealerLogin = () => {
+    navigate("/dealerLogin");
+  };
+  const NTSocietyLogin = () => {
+    navigate("/societyLogin");
+  };
 
   return (
     <>
@@ -108,7 +107,7 @@ const Navbar = () => {
               }}
             />
             <Tab
-              label="Dashboards"
+              label="Dashboard"
               onClick={NTDashboards}
               sx={{
                 color: "#000000",
@@ -180,12 +179,10 @@ const Navbar = () => {
                           color: "#3A98B9",
                           backgroundColor: "#ffffff",
                         },
-                        
                       }}
                       onClick={NTDealerLogin}
                     >
                       DEALER
-                      
                     </Button>
                   </Box>
                   <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
@@ -202,7 +199,6 @@ const Navbar = () => {
                           color: "#3A98B9",
                           backgroundColor: "#ffffff",
                         },
-                       
                       }}
                       onClick={NTSocietyLogin}
                     >
