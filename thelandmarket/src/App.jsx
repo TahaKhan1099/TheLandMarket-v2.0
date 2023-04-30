@@ -8,6 +8,7 @@ import Dashboards from "./components/Dashboards/Dashboards";
 import Societies from "./components/Societies/Societies";
 import DealerLogin from "./components/DealerLogin/DealerLogin";
 import SocietyLogin from "./components/SocietyLogin/SocietyLogin";
+import Register from "./components/Register/Register";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/societies" element={<Societies />} />
             <Route path="/dealerLogin" element={<DealerLogin />} />
             <Route path="/societyLogin" element={<SocietyLogin />} />
+            <Route path="/register" element={<SocietyLogin />} />
           </Routes>
       
         <Footer />

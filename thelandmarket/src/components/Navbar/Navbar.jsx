@@ -31,7 +31,7 @@ const style = {
 const Navbar = () => {
   const [value, setValue] = useState();
   const navigate = useNavigate();
-  const [open, setOpen] = useState();
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
