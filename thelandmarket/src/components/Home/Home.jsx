@@ -7,18 +7,21 @@ import {
   Grid,
   Box,
   createTheme,
-  OutlinedInput,
   ThemeProvider,
   Container,
   Button,
 } from "@mui/material";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import Poster1 from "../../assets/images/DHAIsbPoster.jpg";
+import Poster2 from "../../assets/images/GulbergPoster.webp";
+import Poster3 from "../../assets/images/ParkViewCityPoster.png";
+import Carousel from "react-bootstrap/Carousel";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -29,7 +32,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Home = () => {
+  const navigate = useNavigate();
   const theme = createTheme();
+
+  const NTRegister = () => {
+    navigate("/register");
+  };
+
   theme.typography.h6 = {
     fontSize: "0.8rem",
     "@media(min-width:800px)": { fontSize: "1.5rem" },
@@ -66,7 +75,7 @@ const Home = () => {
               Our Priority
             </Typography>
             <Typography variant="h4" align="center">
-              Click Here To Register Yourself
+              Start Now by Registering Yourself
             </Typography>
           </ThemeProvider>
           <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
@@ -86,6 +95,7 @@ const Home = () => {
                   height: "1.5rem",
                 },
               }}
+              onClick={NTRegister}
             >
               REGISTER
             </Button>
@@ -93,8 +103,25 @@ const Home = () => {
         </Grid>
       </Grid>
       <Box>
-        <Typography variant="h3" sx={{textAlign:'center', mt: '10rem'}}>Our Popular Residence</Typography>
-        
+        <Typography variant="h3" sx={{ textAlign: "center", mt: "10rem" }}>
+          Our Popular Residence
+        </Typography>
+        <Box>
+          {/* <Carousel fade>
+              <Carousel.Item>
+                <img src={Poster1} alt="First slide"/>
+                <Carousel.Caption>DHA Islamabad</Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={Poster2} alt="Second slide" />
+                <Carousel.Caption>Gulberg Islamabad</Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={Poster3} alt="Third slide" />
+                <Carousel.Caption>Park View City</Carousel.Caption>
+              </Carousel.Item>
+            </Carousel> */}
+        </Box>
       </Box>
       <Typography variant="h4" mt="150px" align="center">
         How it Works?
@@ -107,41 +134,96 @@ const Home = () => {
           marginTop: "8rem",
         }}
       >
-        
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={{ xs: 1, sm: 2, md: 4 }}
         >
-          <Item sx={{ width: "10rem", height: "auto" }}>
-            <Card sx={{border: "none", boxShadow: "none"}}>
-              <CardMedia component="img" image="/src/assets/images/logoNew.PNG"/>
-              <CardContent >
-                <Typography variant="h9" gutterBottom component="div">Search</Typography>
-                <Typography variant="body2">Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum </Typography>
+          <Item sx={{ width: "15rem", height: "auto" }}>
+            <Card sx={{ border: "none", boxShadow: "none" }}>
+              <CardMedia
+                component="img"
+                image="/src/assets/images/SearchSociety2.PNG"
+              />
+
+              <CardContent>
+                <Typography variant="h6" gutterBottom component="div">
+                  Search for a Society
+                </Typography>
+                <Typography sx={{ padding: "1rem", fontFamily: "Poppins" }}>
+                  Find the plot that best matches your interest from the
+                  socities registered on our website, or simply search for a
+                  specific area{" "}
+                </Typography>
               </CardContent>
             </Card>
           </Item>
-          <Grid item xs={6} sx={{ width: "8rem", height: "10rem" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              "@media(max-width: 800px)": {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "2rem",
+                transform: "rotate(90deg)",
+              },
+            }}
+          >
             <Lottie animationData={ArrowAnimation3} />
-          </Grid>
-          <Item sx={{ width: "10rem", height: "auto" }}>
-          <Card sx={{border: "none", boxShadow: "none"}}>
-              <CardMedia component="img" image="/src/assets/images/logoNew.PNG"/>
-              <CardContent >
-                <Typography variant="h9" gutterBottom component="div">Search</Typography>
-                <Typography variant="body2">Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum </Typography>
+          </Box>
+          <Item sx={{ width: "15rem", height: "auto" }}>
+            <Card sx={{ border: "none", boxShadow: "none" }}>
+              <CardMedia
+                component="img"
+                image="/src/assets/images/TrackProperty2.PNG"
+           
+              />
+              <CardContent>
+                <Typography variant="h6" gutterBottom component="div">
+                  Track Property
+                </Typography>
+                <Typography sx={{ padding: "1rem", fontFamily: "Poppins" }}>
+                  You can simply track you property in the easiest way possible
+                  with our website. Simply head to the Society section and you
+                  can find your property visually there{" "}
+                </Typography>
               </CardContent>
             </Card>
           </Item>
-          <Grid item xs={6} sx={{ width: "8rem", height: "10rem", transform: 'rotate(90deg)' }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              "@media(max-width: 800px)": {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "2rem",
+                transform: "rotate(90deg)",
+              },
+            }}
+          >
             <Lottie animationData={ArrowAnimation3} />
-          </Grid>
-          <Item sx={{ width: "10rem", height: "auto" }}>
-          <Card sx={{border: "none", boxShadow: "none"}}>
-              <CardMedia component="img" image="/src/assets/images/logoNew.PNG"/>
-              <CardContent >
-                <Typography variant="h9" gutterBottom component="div">Search</Typography>
-                <Typography variant="body2">Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum </Typography>
+          </Box>
+          <Item sx={{ width: "15rem", height: "auto" }}>
+            <Card sx={{ border: "none", boxShadow: "none" }}>
+              <CardMedia
+                component="img"
+                image="/src/assets/images/DealerValuation2.PNG"
+               
+              />
+              <CardContent>
+                <Typography variant="h6" gutterBottom component="div">
+                  Valuation with Dealer
+                </Typography>
+                <Typography sx={{ padding: "1rem", fontFamily: "Poppins" }}>
+                  Interested in a buying specific plot? Schedule a meeting with
+                  our registered dealers with just a click and own the property
+                  without wasting your time{" "}
+                </Typography>
               </CardContent>
             </Card>
           </Item>

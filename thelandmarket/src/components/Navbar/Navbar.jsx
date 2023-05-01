@@ -56,6 +56,9 @@ const Navbar = () => {
   const NTSocietyLogin = () => {
     navigate("/societyLogin");
   };
+  const NTPlotFinder = () =>{
+    navigate("/plotfinder");
+  }
 
   return (
     <>
@@ -120,6 +123,17 @@ const Navbar = () => {
             <Tab
               label="Societies"
               onClick={NTSocieties}
+              sx={{
+                color: "#000000",
+                fontFamily: "Poppins",
+                fontSize: "1.2rem",
+                marginTop: "0.5rem",
+                "&:hover": { textDecoration: "underline #3A98B9" },
+              }}
+            />
+            <Tab
+              label="Plot-Finder"
+              onClick={NTPlotFinder}
               sx={{
                 color: "#000000",
                 fontFamily: "Poppins",

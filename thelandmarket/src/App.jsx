@@ -9,6 +9,7 @@ import Societies from "./components/Societies/Societies";
 import DealerLogin from "./components/DealerLogin/DealerLogin";
 import SocietyLogin from "./components/SocietyLogin/SocietyLogin";
 import Register from "./components/Register/Register";
+import PlotFinder from "./components/PlotFinder/PlotFinder";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
             <Route path="/societies" element={<Societies />} />
             <Route path="/dealerLogin" element={<DealerLogin />} />
             <Route path="/societyLogin" element={<SocietyLogin />} />
-            <Route path="/register" element={<SocietyLogin />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/plotfinder" element={<PlotFinder />} />
           </Routes>
       
         <Footer />
