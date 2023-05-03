@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Typography,
   Grid,
@@ -11,8 +11,30 @@ import {
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import background from "../../assets/images/registration1.jpg";
+import { UserAuth } from "../../Context/AuthContext";
+
+import { useNavigate } from "react-router-dom";
 
 const DealerRegistration = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const { createUser } = UserAuth();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const userCredential = await createUser(email, password);
+      console.log("User registered:", userCredential.user);
+      navigate("/about");
+    } catch (e) {
+      setError(e.message);
+      console.log("Error registering user:", e);
+    }
+  };
+
   return (
     <Container maxWidth="xl">
       <Box sx={{ position: "relative" }}>
@@ -76,21 +98,22 @@ const DealerRegistration = () => {
             },
           }}
         >
-          <form>
+          <form onSubmit={handleSubmit}>
             <Box sx={{ marginTop: "2rem" }}>
-              <TextField
-                id="outlined-basic"
-                label="Enter Your Email"
-                variant="outlined"
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Box>
 
             <Box sx={{ marginTop: "2rem" }}>
-              <TextField
-                id="outlined-password-input"
-                label="Enter Your Password"
+              <input
                 type="password"
-                autoComplete="current-password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Box>
             <Button
@@ -103,6 +126,7 @@ const DealerRegistration = () => {
                 border: " 1px solid #3A98B9",
                 "&:hover": { color: "#3A98B9", backgroundColor: "#ffffff" },
               }}
+              type="submit"
             >
               SUBMIT
             </Button>
