@@ -197,7 +197,9 @@ const Navbar = () => {
                       onClick={NTDealerLogin}
                     >
                       DEALER
+                      
                     </Button>
+                    {handleClose}
                   </Box>
                   <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
                     <Button

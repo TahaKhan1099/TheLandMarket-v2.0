@@ -9,12 +9,13 @@ import {
   Container,
   Button,
 } from "@mui/material";
-import GoogleIcon from '@mui/icons-material/Google';
-import background from "../../assets/images/DealerBackground.avif";
-const DealerLogin = () => {
+import GoogleIcon from "@mui/icons-material/Google";
+import background from "../../assets/images/registration1.jpg";
+
+const SocietyRegistration = () => {
   return (
     <Container maxWidth="xl">
-      <Box sx={{position: "relative"}}>
+      <Box sx={{ position: "relative" }}>
         <img
           src={background}
           alt=""
@@ -31,45 +32,50 @@ const DealerLogin = () => {
 
       <Box
         sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%,-50%)',
-          zIndex: '5',
-          background: '#fff',
-          width: '30%',
-          height: '75%',
-          borderRadius: '10%',
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
+          zIndex: "5",
+          background: "#fff",
+          width: "30%",
+          height: "75%",
+          borderRadius: "10%",
           "@media(max-width: 800px)": {
-           marginTop: '10%',
-           borderRadius: '1rem',
-           width: '45%' 
+            marginTop: "10%",
+            borderRadius: "1rem",
+            width: "45%",
           },
           "@media(max-width: 600px)": {
-            marginTop: '10%',
-            borderRadius: '1rem',
-            width: '65%' 
-           },
+            marginTop: "10%",
+            borderRadius: "1rem",
+            width: "65%",
+          },
         }}
       >
         {/* <Box>
-          <img src="/src/assets/images/logoNew.PNG" width={60} />
-        </Box> */}
+      <img src="/src/assets/images/logoNew.PNG" width={60} />
+    </Box> */}
         <Typography
           sx={{
             color: "#3A98B9",
-            textAlign: 'center',
+            textAlign: "center",
             fontSize: "2rem",
             marginTop: "2rem",
             fontFamily: "Poppins",
           }}
         >
-          Dealer Login
+          Society Registration
         </Typography>
-        <Box sx={{textAlign: 'center', marginTop: '7rem',  "@media(max-width: 800px)": {
-           marginTop: '3rem',
-          
-          },}}>
+        <Box
+          sx={{
+            textAlign: "center",
+            marginTop: "7rem",
+            "@media(max-width: 800px)": {
+              marginTop: "3rem",
+            },
+          }}
+        >
           <form>
             <Box sx={{ marginTop: "2rem" }}>
               <TextField
@@ -102,13 +108,18 @@ const DealerLogin = () => {
             </Button>
           </form>
         </Box>
-        <Typography sx={{textAlign:'center', marginTop: '3rem'}}>———— OR ———— </Typography>
-        <Typography sx={{textAlign: 'center', fontSize: '1rem'}}>Log In with Google</Typography>
-        <Button sx={{display: 'block', margin: 'auto', marginTop:'1rem'}}><GoogleIcon color="#primary"/></Button>
-        
+        <Typography sx={{ textAlign: "center", marginTop: "3rem" }}>
+          ———— OR ————{" "}
+        </Typography>
+        <Typography sx={{ textAlign: "center", fontSize: "1rem" }}>
+          Log In with Google
+        </Typography>
+        <Button sx={{ display: "block", margin: "auto", marginTop: "1rem" }}>
+          <GoogleIcon color="#primary" />
+        </Button>
       </Box>
     </Container>
   );
 };
 
-export default DealerLogin;
+export default SocietyRegistration;

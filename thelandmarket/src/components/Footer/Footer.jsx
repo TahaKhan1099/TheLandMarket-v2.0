@@ -31,7 +31,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        marginTop: "15rem",
+        marginTop: "5rem",
         borderTop: "2px solid #A6D0DD",
         display: "flex",
         flexDirection: "column",
