@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Typography,
   Grid,
@@ -12,7 +12,32 @@ import {
 import GoogleIcon from "@mui/icons-material/Google";
 import background from "../../assets/images/registration1.jpg";
 
+import { UserAuth } from "../../Context/AuthContext";
+
+import { useNavigate } from "react-router-dom";
+
+
 const SocietyRegistration = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const { createUser } = UserAuth();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const userCredential = await createUser(email, password);
+      console.log("User registered:", userCredential.user);
+      navigate("/societyRegDetails");
+    } catch (e) {
+      setError(e.message);
+      console.log("Error registering user:", e);
+    }
+  };
+
   return (
     <Container maxWidth="xl">
       <Box sx={{ position: "relative" }}>
@@ -76,21 +101,40 @@ const SocietyRegistration = () => {
             },
           }}
         >
-          <form>
+          <form onSubmit={handleSubmit}>
             <Box sx={{ marginTop: "2rem" }}>
-              <TextField
-                id="outlined-basic"
-                label="Enter Your Email"
-                variant="outlined"
+            <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter Your Email"
+                style={{
+                  border: '1px solid #c0c0c0',
+                  borderRadius: '4px',
+                  width: '280px',
+                  height: '48px',
+                  boxSizing: 'border-box',
+                  textAlign: 'center'
+                }}
               />
             </Box>
 
             <Box sx={{ marginTop: "2rem" }}>
-              <TextField
-                id="outlined-password-input"
-                label="Enter Your Password"
+            <input
                 type="password"
-                autoComplete="current-password"
+                id="password"
+                value={password}
+                placeholder="Enter Password"
+                onChange={(e) => setPassword(e.target.value)}
+                 style={{
+                  border: '1px solid #c0c0c0',
+                  borderRadius: '4px',
+                  width: '280px',
+                  height: '48px',
+                  boxSizing: 'border-box',
+                  textAlign: 'center'
+                }}
               />
             </Box>
             <Button
@@ -103,6 +147,7 @@ const SocietyRegistration = () => {
                 border: " 1px solid #3A98B9",
                 "&:hover": { color: "#3A98B9", backgroundColor: "#ffffff" },
               }}
+              type="submit"
             >
               SUBMIT
             </Button>
@@ -112,7 +157,7 @@ const SocietyRegistration = () => {
           ———— OR ————{" "}
         </Typography>
         <Typography sx={{ textAlign: "center", fontSize: "1rem" }}>
-          Log In with Google
+          Sign Up with Google
         </Typography>
         <Button sx={{ display: "block", margin: "auto", marginTop: "1rem" }}>
           <GoogleIcon color="#primary" />

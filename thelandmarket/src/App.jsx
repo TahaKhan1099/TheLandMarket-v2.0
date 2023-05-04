@@ -12,6 +12,11 @@ import Register from "./components/Register/Register";
 import PlotFinder from "./components/PlotFinder/PlotFinder";
 import DealerRegistration from "./components/DealerRegistration/DealerRegistration";
 import SocietyRegistration from "./components/SocietyRegistration/SocietyRegistration";
+import DealerDashboard from "./components/DealerDashboard/DealerDashboard";
+import SocietyDashboard from "./components/SocietyDashboard/SocietyDashboard";
+import DealerRegDetails from "./components/DealerRegDetails/DealerRegDetails";
+import SocietyRegDetails from "./components/SocietyRegDetails/SocietyRegDetails";
+import ProtectedRoute from "./Context/ProtectedRoute";
 import { AuthContextProvider } from "./Context/AuthContext";
 
 function App() {
@@ -19,7 +24,7 @@ function App() {
     <>
       <AuthContextProvider>
         <BrowserRouter>
-          <Navbar />
+          <Navbar />  
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -38,6 +43,24 @@ function App() {
               path="/societyRegistration"
               element={<SocietyRegistration />}
             />
+            <Route
+              path="/dealerDashboard"
+              element={
+                <ProtectedRoute>
+                  <DealerDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/societyDashboard"
+              element={
+                <ProtectedRoute>
+                  <SocietyDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/dealerRegDetails" element={<DealerRegDetails />} />
+            <Route path="/societyRegDetails" element={<SocietyRegDetails />} />
           </Routes>
           <Footer />
         </BrowserRouter>

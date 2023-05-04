@@ -28,7 +28,7 @@ const DealerRegistration = () => {
     try {
       const userCredential = await createUser(email, password);
       console.log("User registered:", userCredential.user);
-      navigate("/about");
+      navigate("/dealerRegDetails");
     } catch (e) {
       setError(e.message);
       console.log("Error registering user:", e);
@@ -105,6 +105,15 @@ const DealerRegistration = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter Your Email"
+                style={{
+                  border: '1px solid #c0c0c0',
+                  borderRadius: '4px',
+                  width: '280px',
+                  height: '48px',
+                  boxSizing: 'border-box',
+                  textAlign: 'center'
+                }}
               />
             </Box>
 
@@ -113,7 +122,16 @@ const DealerRegistration = () => {
                 type="password"
                 id="password"
                 value={password}
+                placeholder="Enter Password"
                 onChange={(e) => setPassword(e.target.value)}
+                 style={{
+                  border: '1px solid #c0c0c0',
+                  borderRadius: '4px',
+                  width: '280px',
+                  height: '48px',
+                  boxSizing: 'border-box',
+                  textAlign: 'center'
+                }}
               />
             </Box>
             <Button
@@ -136,7 +154,7 @@ const DealerRegistration = () => {
           ———— OR ————{" "}
         </Typography>
         <Typography sx={{ textAlign: "center", fontSize: "1rem" }}>
-          Log In with Google
+          Sign Up with Google
         </Typography>
         <Button sx={{ display: "block", margin: "auto", marginTop: "1rem" }}>
           <GoogleIcon color="#primary" />
