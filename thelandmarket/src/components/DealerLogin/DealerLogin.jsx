@@ -1,17 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Typography,
-  Grid,
   Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
   Container,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import GoogleIcon from '@mui/icons-material/Google';
 import background from "../../assets/images/DealerBackground.avif";
+import { UserAuth } from "../../Context/AuthContext";
+
 const DealerLogin = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+
+  const {signIn} = UserAuth();
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    setError("");
+    try{
+      await signIn(email,password);
+      navigate('/dealerDashboard');
+    }
+    catch(e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
   return (
     <Container maxWidth="xl">
       <Box sx={{position: "relative"}}>
@@ -70,21 +88,40 @@ const DealerLogin = () => {
            marginTop: '3rem',
           
           },}}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Box sx={{ marginTop: "2rem" }}>
-              <TextField
-                id="outlined-basic"
-                label="Enter Your Email"
-                variant="outlined"
+            <input
+                type="email"
+                required
+                placeholder="Enter Your Email"
+                style={{
+                  border: "1px solid #c0c0c0",
+                  borderRadius: "4px",
+                  marginTop: '0.5rem',
+                  width: "280px",
+                  height: "48px",
+                  boxSizing: "border-box",
+                  textAlign: "center",
+                }}
+                onChange={(e)=>setEmail(e.target.value)}
               />
             </Box>
 
             <Box sx={{ marginTop: "2rem" }}>
-              <TextField
-                id="outlined-password-input"
-                label="Enter Your Password"
+            <input
                 type="password"
-                autoComplete="current-password"
+                required
+                placeholder="Enter Your Password"
+                style={{
+                  border: "1px solid #c0c0c0",
+                  borderRadius: "4px",
+                  marginTop: '0.5rem',
+                  width: "280px",
+                  height: "48px",
+                  boxSizing: "border-box",
+                  textAlign: "center",
+                }}
+                onChange={(e)=>setPassword(e.target.value)}
               />
             </Box>
             <Button
