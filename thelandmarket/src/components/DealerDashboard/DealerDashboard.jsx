@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../Context/AuthContext";
 import { Container, Box, Button, Typography } from "@mui/material";
+import {motion} from "framer-motion";
+import SideNav from "../SideNav.jsx/SideNav";
 
 const DealerDashboard = () => {
   const navigate = useNavigate();
@@ -18,12 +20,10 @@ const DealerDashboard = () => {
   };
 
   return (
-    <Container maxWidth="xl">
-      <Box mt={20}>
-        <Typography> User Email: {user && user.email}</Typography>
-        <Button onClick={handleLogout}>LogOut</Button>
-      </Box>
-    </Container>
+    <>
+      <SideNav/>
+      
+    </>
   );
 };
 
