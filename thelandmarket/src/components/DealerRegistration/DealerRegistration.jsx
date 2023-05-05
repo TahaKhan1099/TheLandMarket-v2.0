@@ -31,6 +31,7 @@ const DealerRegistration = () => {
       navigate("/dealerRegDetails");
     } catch (e) {
       setError(e.message);
+      window.alert("Error registering user:", e);
       console.log("Error registering user:", e);
     }
   };
