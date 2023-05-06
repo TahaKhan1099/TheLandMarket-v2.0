@@ -22,7 +22,6 @@ const DealerDashboard = () => {
   return (
     <>
       <SideNav/>
-      
     </>
   );
 };

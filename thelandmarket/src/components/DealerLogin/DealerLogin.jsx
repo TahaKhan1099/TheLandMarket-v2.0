@@ -23,10 +23,12 @@ const DealerLogin = () => {
     try{
       await signIn(email,password);
       navigate('/dealerDashboard');
+      console.log(signIn);
     }
     catch(e) {
       setError(e.message);
       console.log(e.message);
+      window.alert("Failed to LogIN")
     }
   };
 
@@ -122,7 +124,9 @@ const DealerLogin = () => {
                   textAlign: "center",
                 }}
                 onChange={(e)=>setPassword(e.target.value)}
+                
               />
+              
             </Box>
             <Button
               sx={{
@@ -134,6 +138,7 @@ const DealerLogin = () => {
                 border: " 1px solid #3A98B9",
                 "&:hover": { color: "#3A98B9", backgroundColor: "#ffffff" },
               }}
+              type="submit"
             >
               SUBMIT
             </Button>
