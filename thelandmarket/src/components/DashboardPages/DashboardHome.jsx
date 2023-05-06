@@ -1,20 +1,85 @@
-import React from 'react'
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../Context/AuthContext";
 
-import { Container, Box, Button, Typography } from '@mui/material';
+import {
+  Container,
+  Box,
+  Button,
+  Typography,
+  Paper,
+  Divider,
+} from "@mui/material";
 
 const DashboardHome = () => {
-  const {user} = UserAuth();
+  const { user } = UserAuth();
   return (
     <Container maxWidth="xl">
-    <Box sx={{marginTop: '10%', marginLeft: '10%'}}>
-      <Typography>Dealer Dashboard</Typography>
-      <Typography> User Email: {user && user.email}</Typography>
-    </Box>
-  </Container>
-   
-  )
-}
+      <Box sx={{ marginTop: "10rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Paper
+            elevation={12}
+            sx={{
+              width: "10rem",
+              height: "10rem",
+              borderRadius: "50%",
+            }}
+          ></Paper>
+          <br />
+        </Box>
+        <hr
+          style={{
+            background: "black",
+            color: "black",
+            borderColor: "black",
+            height: "0.1rem",
+            width: "30rem",
+            marginTop: "2rem",
+          }}
+        />
+      </Box>
+      <Box sx={{ width: "100%", display: "flex" }}>
+          <Box sx={{ width: "50%", }}>
+            <Typography
+              sx={{
+                marginTop: "2rem",
+                fontFamily: "Poppins",
+                fontSize: "2.5rem",
+                color: "#3A98B9",
+              }}
+            >
+              Name Here
+            </Typography>
+            <Typography sx={{ fontFamily: "Poppins", fontSize: "1rem" }}>
+              Real Estate Dealer
+            </Typography>
+            <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
+              User Email: {user && user.email}
+            </Typography>
+            <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
+              (Agency Name)
+            </Typography>
+            <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
+              (Agency Name)
+            </Typography>
+          </Box>
 
-export default DashboardHome
+
+          <Box sx={{ flexGrow: '1',}}>
+            <Typography sx={{ fontFamily: "Poppins", fontSize: '1.5rem', textAlign: 'center', marginTop: '5rem', textDecoration:  'underline'}}>
+              Scheduled Meetings
+            </Typography>
+          </Box>
+      
+      </Box>
+    </Container>
+  );
+};
+
+export default DashboardHome;

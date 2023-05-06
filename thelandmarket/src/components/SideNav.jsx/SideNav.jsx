@@ -187,6 +187,38 @@ const SideNav = () => {
                 />
               </ListItemButton>
             </ListItem>
+
+
+             {/* ----------------------LogOutIcon---------------- */}
+
+             <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+                onClick={handleLogout}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                    color: "#3A98B9",
+                  }}
+                >
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Logout"
+                  sx={{ opacity: open ? 1 : 0, color: "#3A98B9" }}
+                />
+              </ListItemButton>
+            </ListItem>
           </List>
           <Divider />
 
@@ -289,37 +321,7 @@ const SideNav = () => {
               </ListItemButton>
             </ListItem>
 
-                  {/* ----------------------LogOutIcon---------------- */}
-
-            <ListItem
-              disablePadding
-              sx={{ display: "block" }}
-            >
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                  marginTop: "10rem",
-                }}
-                onClick={handleLogout}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                    color: "#3A98B9",
-                  }}
-                >
-                  <LogoutIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Logout"
-                  sx={{ opacity: open ? 1 : 0, color: "#3A98B9" }}
-                />
-              </ListItemButton>
-            </ListItem>
+                 
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
