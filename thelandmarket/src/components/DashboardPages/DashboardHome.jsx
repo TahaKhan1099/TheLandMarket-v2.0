@@ -8,11 +8,12 @@ import {
   Button,
   Typography,
   Paper,
-  Divider,
+  Rating,
 } from "@mui/material";
 
 const DashboardHome = () => {
   const { user } = UserAuth();
+  const [value, setValue] = React.useState(1);
   return (
     <Container maxWidth="xl">
       <Box sx={{ marginTop: "10rem" }}>
@@ -45,38 +46,54 @@ const DashboardHome = () => {
         />
       </Box>
       <Box sx={{ width: "100%", display: "flex" }}>
-          <Box sx={{ width: "50%", }}>
-            <Typography
-              sx={{
-                marginTop: "2rem",
-                fontFamily: "Poppins",
-                fontSize: "2.5rem",
-                color: "#3A98B9",
-              }}
-            >
-              Name Here
-            </Typography>
-            <Typography sx={{ fontFamily: "Poppins", fontSize: "1rem" }}>
-              Real Estate Dealer
-            </Typography>
-            <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
-              User Email: {user && user.email}
-            </Typography>
-            <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
-              (Agency Name)
-            </Typography>
-            <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
-              (Agency Name)
-            </Typography>
+        <Box sx={{ width: "50%" }}>
+          <Typography
+            sx={{
+              marginTop: "2rem",
+              fontFamily: "Poppins",
+              fontSize: "2.5rem",
+              color: "#3A98B9",
+            }}
+          >
+            Name Here
+          </Typography>
+          <Typography sx={{ fontFamily: "Poppins", fontSize: "1rem" }}>
+            Real Estate Dealer
+          </Typography>
+          <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
+            User Email: {user && user.email}
+          </Typography>
+          <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
+            (Society Name)
+          </Typography>
+          <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
+            (Agency Name)
+          </Typography>
+          <Box sx={{ width: "100%", display: "flex" }}>
+            <Box sx={{ width: "50%" }}>
+              <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
+                Rating:
+              </Typography>
+            </Box>
+            <Box sx={{ flexGrow: "1", width: '100%' }}>
+              <Rating name="read-only" value={value} readOnly sx={{marginTop:'2rem',}}/>
+            </Box>
           </Box>
+        </Box>
 
-
-          <Box sx={{ flexGrow: '1',}}>
-            <Typography sx={{ fontFamily: "Poppins", fontSize: '1.5rem', textAlign: 'center', marginTop: '5rem', textDecoration:  'underline'}}>
-              Scheduled Meetings
-            </Typography>
-          </Box>
-      
+        <Box sx={{ flexGrow: "1" }}>
+          <Typography
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: "1.5rem",
+              textAlign: "center",
+              marginTop: "5rem",
+              textDecoration: "underline",
+            }}
+          >
+            Scheduled Meetings
+          </Typography>
+        </Box>
       </Box>
     </Container>
   );

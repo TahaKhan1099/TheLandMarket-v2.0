@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import { deepOrange, deepPurple } from "@mui/material/colors";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,7 +12,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -147,6 +149,9 @@ const SideNav = () => {
               alt="#"
               style={{ width: "50px", marginLeft: "1.5%" }}
             />
+            <Box sx={{ marginLeft: "auto", display: 'flex' }}>
+              <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+            </Box>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -161,7 +166,7 @@ const SideNav = () => {
           </DrawerHeader>
           <Divider />
           <List>
-                {/* ---------------------HOME ICON----------------------- */}
+            {/* ---------------------HOME ICON----------------------- */}
 
             <ListItem disablePadding sx={{ display: "block" }} onClick={NTHome}>
               <ListItemButton
@@ -188,13 +193,9 @@ const SideNav = () => {
               </ListItemButton>
             </ListItem>
 
+            {/* ----------------------LogOutIcon---------------- */}
 
-             {/* ----------------------LogOutIcon---------------- */}
-
-             <ListItem
-              disablePadding
-              sx={{ display: "block" }}
-            >
+            <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -223,9 +224,7 @@ const SideNav = () => {
           <Divider />
 
           <List sx={{ textAlign: "center", marginTop: "12rem" }}>
-
-
-             {/* ---------------------------DashboardIcon------------------ */}
+            {/* ---------------------------DashboardIcon------------------ */}
 
             <ListItem
               disablePadding
@@ -257,7 +256,7 @@ const SideNav = () => {
               </ListItemButton>
             </ListItem>
 
-                  {/* ------------------------PlotsIcon---------------------- */}
+            {/* ------------------------PlotsIcon---------------------- */}
 
             <ListItem
               disablePadding
@@ -288,8 +287,8 @@ const SideNav = () => {
                 />
               </ListItemButton>
             </ListItem>
-           
-                  {/* ---------------------SettingsIcon---------------- */}
+
+            {/* ---------------------SettingsIcon---------------- */}
 
             <ListItem
               disablePadding
@@ -320,8 +319,6 @@ const SideNav = () => {
                 />
               </ListItemButton>
             </ListItem>
-
-                 
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
