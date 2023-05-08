@@ -7,7 +7,7 @@ import SideNav from "../SideNav.jsx/SideNav";
 
 const DealerDashboard = () => {
   const navigate = useNavigate();
-  const { user, logout } = UserAuth();
+  const { user, logout } = UserAuth() ||{};
   const handleLogout = async () => {
     try {
       await logout();

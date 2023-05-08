@@ -21,7 +21,7 @@ const DealerRegistration = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { createUser } = UserAuth();
+  const { createUser } = UserAuth() || {};
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");

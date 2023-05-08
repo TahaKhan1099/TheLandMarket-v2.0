@@ -1,134 +1,101 @@
 import { Container, Box, Typography, Paper, Button } from "@mui/material";
 
 import React, { useState, useEffect } from "react";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { UserAuth } from "../../Context/AuthContext";
+import { ref, onValue, push, set, remove } from "firebase/database";
+
 
 const Plots = () => {
-  const [newPlot, setNewPlot] = useState({
-    dealerName: "",
-    dealerPhoneNumber: "",
-    plotSize: "",
-    plotLocation: "",
-    plotPrice: "",
-    plotId: "",
-  });
+ 
+  // State variables
+  const { user } = UserAuth() || {};
+  const [dealerName, setDealerName] = useState("");
+  const [plotPrice, setPlotPrice] = useState("");
+  const [dealerPhoneNumber, setDealerPhoneNumber] = useState("");
+  const [plotSize, setPlotSize] = useState("");
+  const [plotId, setPlotId] = useState("");
+  const [plotLocation, setPlotLocation] = useState("");
+  const [numberOfPlots, setNumberOfPlots] = useState(0);
 
-  
-
-  const [numPlots, setNumPlots] = useState(0);
-
-  const currentUser = auth.currentUser;
-  const userId = currentUser ? currentUser.uid : null;
-
-  let name, value;
-
-  
-  const fetchNumPlots = async () => {
-    const snapshot = await fetch(
-      `https://tlm-auth-development-default-rtdb.firebaseio.com/plots.json?orderBy="userId"&equalTo="${newPlot.userId}"`,
-     
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
-    const data = await snapshot.json();
-    if (data) {
-      setNumPlots(Object.keys(data).length);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!user) {
+      console.log("User not logged in");
+      return;
     }
+    window.alert("Plot added");
+   
   };
-  useEffect(() => {
-    fetchNumPlots();
-  }, []);
+  // State variable for the dealer's plots
+  const [plots, setPlots] = useState([]); //setting it to Array instead of Obj to make the map function work
 
+  const addPlot = () => {
+    //ID of the currently signed-in dealer
+    const currentDealerUserId = auth.currentUser.uid;
 
-  // console.log(userId);
-  // const fetchPlotsCount = async (userId) =>{
-  //   try{
-  //     const response = await fetch(
-  //       `https://tlm-auth-development-default-rtdb.firebaseio.com/plots.json?orderBy='userId'&equalTo='${userId}'`
+    //reference to the dealer's plots node in the database
+    const dealerPlotsRef = ref(db, `plots/${currentDealerUserId}`);
 
-  //     );
-  //     const data = await response.json();
-  //     const count = Object.keys(data).length;
-  //     return count;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return null;
-  //   }
-  // }
+    //new unique key for the plot
+    const newPlotRef = push(dealerPlotsRef);
 
-  // useEffect(()=>{
-  //   const fetchCount = async () =>{
-  //     const count = await fetchPlotsCount(userId);
-  //     setPlotsCount(count);
-  //   };
-  //   fetchCount();
-  // },[userId])
-
-  const postPlot = (event) => {
-    name = event.target.name;
-    value = event.target.value;
-    setNewPlot({ ...newPlot, [name]: value });
-  };
-
-  const submitPlot = async (event) => {
-    event.preventDefault(console.log("Add New Plot Form not Filled"));
-    const {
+    //creating a new plot object
+    const newPlot = {
       dealerName,
+      plotPrice,
       dealerPhoneNumber,
       plotSize,
-      plotLocation,
-      plotPrice,
       plotId,
-    } = newPlot;
+      plotLocation,
+    };
 
-    if (
-      dealerName &&
-      dealerPhoneNumber &&
-      plotSize &&
-      plotLocation &&
-      plotPrice &&
-      plotId
-    ) {
-      const res = await fetch(
-        `https://tlm-auth-development-default-rtdb.firebaseio.com/plots/${plotId}.json`, //used backticks to use string interpolation
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            dealerName,
-            dealerPhoneNumber,
-            plotSize,
-            plotLocation,
-            plotPrice,
-            userId: userId,
-          }),
-        }
-      );
-      if (res) {
-        setNewPlot({
-          dealerName: "",
-          dealerPhoneNumber: "",
-          plotSize: "",
-          plotLocation: "",
-          plotPrice: "",
-          plotId: "",
-        });
-        window.alert("Plot Added");
-        fetchNumPlots(); 
-        console.log(setNewPlot);
-      } else {
-        window.alert("Plot not Added");
-      }
-    }
+    //// Setting the new plot object at the new key
+    set(newPlotRef, newPlot);
+
+    // Clearing the form fields
+    setDealerName("");
+    setPlotPrice("");
+    setDealerPhoneNumber("");
+    setPlotSize("");
+    setPlotId("");
+    setPlotLocation("");
+
+    window.alert("Plot added");
+  }; 
+
+  //fetching the dealer's plots from the database
+  const fetchPlots = () => {
+    const currentDealerUserId = auth.currentUser.uid;
+
+    //reference to the dealer's plots node in the database
+    const dealerPlotsRef = ref(db, `plots/${currentDealerUserId}`);
+
+    // Listening for changes to the dealer's plots node
+    onValue(dealerPlotsRef, (snapshot) => {
+      // Geting the plots data as an object
+      const plotsData = snapshot.val() || {};
+
+      // Converting the plots object to an array and storing it in state
+      const plotsArray = Object.entries(plotsData).map(([id, data]) => ({
+        id,
+        ...data,
+      }));
+      setPlots(plotsArray);
+      setNumberOfPlots(plotsArray.length);
+    });
   };
 
-  // useEffect hook to fetch the number of plots added by the current user from the database
+  // Fetching the dealer's plots when the component mounts
+  useEffect(() => {
+    fetchPlots();
+  }, []);
+
+  const handleDelete = (id) => {
+    const currentDealerUserId = auth.currentUser.uid;
+    const dealerPlotsRef = ref(db, `plots/${currentDealerUserId}/${id}`);
+    remove(dealerPlotsRef);
+  };
 
   return (
     <Container maxWidth="xl">
@@ -203,9 +170,7 @@ const Plots = () => {
                   color: "#3A98B9",
                   fontFamily: "Poppins",
                 }}
-              >
-               {numPlots}
-              </Typography>
+              >{numberOfPlots}</Typography>
             </Typography>
           </Paper>
         </Box>
@@ -237,14 +202,19 @@ const Plots = () => {
               >
                 Add New Plot
               </Typography>
-              <form method="POST">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  addPlot();
+                }}
+              >
                 <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
                   <input
                     type="text"
                     name="dealerName"
                     required
-                    value={newPlot.dealerName}
-                    onChange={postPlot}
+                    value={dealerName}
+                    onChange={(e) => setDealerName(e.target.value)}
                     placeholder="Dealer Name"
                     style={{
                       border: "1px solid #c0c0c0",
@@ -261,8 +231,8 @@ const Plots = () => {
                     type="number"
                     name="dealerPhoneNumber"
                     required
-                    value={newPlot.dealerPhoneNumber}
-                    onChange={postPlot}
+                    value={dealerPhoneNumber}
+                    onChange={(e) => setDealerPhoneNumber(e.target.value)}
                     placeholder="Phone Number"
                     style={{
                       border: "1px solid #c0c0c0",
@@ -279,8 +249,8 @@ const Plots = () => {
                     type="text"
                     name="plotId"
                     required
-                    value={newPlot.plotId}
-                    onChange={postPlot}
+                    value={plotId}
+                    onChange={(e) => setPlotId(e.target.value)}
                     placeholder="Plot ID"
                     style={{
                       border: "1px solid #c0c0c0",
@@ -297,9 +267,9 @@ const Plots = () => {
                     type="text"
                     name="plotSize"
                     required
-                    value={newPlot.plotSize}
-                    onChange={postPlot}
-                    placeholder="Phone Size"
+                    value={plotSize}
+                    onChange={(e) => setPlotSize(e.target.value)}
+                    placeholder="Plot Size"
                     style={{
                       border: "1px solid #c0c0c0",
                       borderRadius: "4px",
@@ -315,8 +285,8 @@ const Plots = () => {
                     type="text"
                     name="plotLocation"
                     required
-                    value={newPlot.plotLocation}
-                    onChange={postPlot}
+                    value={plotLocation}
+                    onChange={(e) => setPlotLocation(e.target.value)}
                     placeholder="Location"
                     style={{
                       border: "1px solid #c0c0c0",
@@ -333,9 +303,9 @@ const Plots = () => {
                     type="text"
                     name="plotPrice"
                     required
-                    value={newPlot.plotPrice}
-                    onChange={postPlot}
-                    placeholder="Phone Price"
+                    value={plotPrice}
+                    onChange={(e) => setPlotPrice(e.target.value)}
+                    placeholder="Plot Price"
                     style={{
                       border: "1px solid #c0c0c0",
                       borderRadius: "4px",
@@ -362,10 +332,11 @@ const Plots = () => {
                       },
                     }}
                     type="submit"
-                    onClick={submitPlot}
+                    
                   >
                     SUBMIT
                   </Button>
+                  
                 </Box>
               </form>
             </Paper>
@@ -396,6 +367,22 @@ const Plots = () => {
               >
                 Added Plots Details
               </Typography>
+              
+              {plots.map((plot) => (
+                <div key={plot.id}>
+                  <input
+                    type="checkbox"
+                    value={plot.id}
+                    onChange={(e) => handleDelete(e.target.value)}
+                  />
+                  <span style={{padding: '5px'}}>{plot.plotId}</span>
+                  <span style={{padding: '5px'}}>{plot.dealerName}</span>
+                  <span style={{padding: '5px'}}>{plot.plotPrice}</span>
+                  <span style={{padding: '5px'}}>{plot.dealerPhoneNumber}</span>
+                  <span style={{padding: '5px'}}>{plot.plotSize}</span>
+                  <span style={{padding: '5px'}}>{plot.plotLocation}</span>
+                </div>
+              ))}
             </Paper>
           </Box>
         </Box>
