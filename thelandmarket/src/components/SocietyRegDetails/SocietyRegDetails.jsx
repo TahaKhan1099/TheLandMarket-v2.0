@@ -7,11 +7,99 @@ import {
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import background from "../../assets/images/registration1.jpg";
-import { UserAuth } from "../../Context/AuthContext";
+import { auth } from "../../firebase";
 
 import { useNavigate } from "react-router-dom";
 
 const SocietyRegDetails = () => {
+  const navigate = useNavigate();
+  const [societyData, setSocietyData] = useState({
+    name: "",
+		city: "",
+		headOfficeAddress: "",
+		societyContactNumber: "",
+		focalPersonName: "",
+		focalPersonCNIC: "",
+		focalPersonEmail: "",
+		focalPersonPhoneNo: "",
+  });
+
+  let name, value;
+  const postSocietyData = (event) =>{
+    name = event.target.name;
+    value = event.target.value;
+    setSocietyData({...societyData, [name]: value});  //accessing it dynamically
+  };
+
+  //connecting with firebase
+  const submitSocietyData = async (event) =>{
+    event.preventDefault();
+    const{
+      name,
+			city,
+			headOfficeAddress,
+			societyContactNumber,
+			focalPersonName,
+			focalPersonCNIC,
+			focalPersonEmail,
+			focalPersonPhoneNo,
+    } = societyData;
+    if(
+      name &&
+			city &&
+			headOfficeAddress &&
+			societyContactNumber &&
+			focalPersonName &&
+			focalPersonCNIC &&
+			focalPersonEmail &&
+			focalPersonPhoneNo
+    ) {
+      const res = await fetch(
+        "https://tlm-auth-development-default-rtdb.firebaseio.com/SocietyDataRecords.json",
+        {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+						city,
+						headOfficeAddress,
+						societyContactNumber,
+						focalPersonName,
+						focalPersonCNIC,
+						focalPersonEmail,
+						focalPersonPhoneNo,
+						userId: userId,
+          }),
+        }
+      );
+      if (res){
+        setSocietyData({
+          name: "",
+					city: "",
+					headOfficeAddress: "",
+					societyContactNumber: "",
+					focalPersonName: "",
+					focalPersonCNIC: "",
+					focalPersonEmail: "",
+					focalPersonPhoneNo: "",
+        });
+        window.alert("Registered");
+        navigate("/societyDashboard");
+      }
+      else{
+        window.alert("Form not Filled Completely");
+      }
+    }
+    else{
+      window.alert("Form not Filled Completely");
+    }
+  }; 
+
+  const currentUser = auth.currentUser;
+  const userId = currentUser ? currentUser.uid : null;
+
   return (
     <Container maxWidth="xl">
       <Box sx={{ position: "relative" }}>
@@ -86,7 +174,7 @@ const SocietyRegDetails = () => {
             },
           }}
         >
-          <form>
+          <form method="POST">
             <Box sx={{ marginTop: "2rem" }}>
               <Typography
                 sx={{
@@ -115,6 +203,8 @@ const SocietyRegDetails = () => {
                   textAlign: "center",
                 
                 }}
+                value={societyData.name}
+                onChange={postSocietyData}
               />
             </Box>
 
@@ -133,6 +223,8 @@ const SocietyRegDetails = () => {
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.city}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
@@ -150,6 +242,8 @@ const SocietyRegDetails = () => {
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.headOfficeAddress}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
@@ -167,6 +261,8 @@ const SocietyRegDetails = () => {
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.societyContactNumber}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "1rem" }}>
@@ -196,6 +292,8 @@ const SocietyRegDetails = () => {
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonName}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
@@ -213,6 +311,8 @@ const SocietyRegDetails = () => {
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonCNIC}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
@@ -230,6 +330,8 @@ const SocietyRegDetails = () => {
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonEmail}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
@@ -247,6 +349,8 @@ const SocietyRegDetails = () => {
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonPhoneNo}
+                onChange={postSocietyData}
               />
             </Box>
             <Button
@@ -260,6 +364,7 @@ const SocietyRegDetails = () => {
                 "&:hover": { color: "#3A98B9", backgroundColor: "#ffffff" },
               }}
               type="submit"
+              onClick={submitSocietyData}
             >
               SUBMIT
             </Button>

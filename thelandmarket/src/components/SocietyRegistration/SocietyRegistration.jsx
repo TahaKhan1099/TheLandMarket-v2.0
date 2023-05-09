@@ -148,6 +148,7 @@ const SocietyRegistration = () => {
                 "&:hover": { color: "#3A98B9", backgroundColor: "#ffffff" },
               }}
               type="submit"
+              
             >
               SUBMIT
             </Button>
