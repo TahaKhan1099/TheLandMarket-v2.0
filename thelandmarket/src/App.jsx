@@ -22,6 +22,10 @@ import Plots from "./components/DashboardPages/Plots";
 import SideNav from "./components/SideNav.jsx/SideNav";
 import ProtectedRoute from "./Context/ProtectedRoute";
 import { AuthContextProvider } from "./Context/AuthContext";
+import SocietyDashboardHome from "./components/SocietyDashboardPages/SocietyDashboardHome";
+import SocietyDashboardDealers from "./components/SocietyDashboardPages/SocietyDashboardDealers";
+import SocietyDashboardPlots from "./components/SocietyDashboardPages/SocietyDashboardPlots";
+import SocietyDashboardSettings from "./components/SocietyDashboardPages/SocietyDashboardSettings";
 
 function App() {
   const location = useLocation();
@@ -74,6 +78,10 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/dashboardHome" element={<DashboardHome />} />
           <Route path="/plots" element={<Plots />} />
+          <Route path="/societyDashboardHome" element={<SocietyDashboardHome />} />
+          <Route path="/societyDashboardDealers" element={<SocietyDashboardDealers />} />
+          <Route path="/societyDashboardPlots" element={<SocietyDashboardPlots />} />
+          <Route path="/societyDashboardSettings" element={<SocietyDashboardSettings />} />
         </Routes>
       </AuthContextProvider>
       {hideHeaderFooter ? null : <Footer />}
