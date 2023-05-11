@@ -34,7 +34,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+ 
   const NTAbout = () => {
     navigate("/about");
   };
@@ -56,9 +56,9 @@ const Navbar = () => {
   const NTSocietyLogin = () => {
     navigate("/societyLogin");
   };
-  const NTPlotFinder = () =>{
+  const NTPlotFinder = () => {
     navigate("/plotfinder");
-  }
+  };
 
   return (
     <>
@@ -143,6 +143,9 @@ const Navbar = () => {
               }}
             />
           </Tabs>
+
+         
+
           <Button
             sx={{
               backgroundColor: "#ffffff",
