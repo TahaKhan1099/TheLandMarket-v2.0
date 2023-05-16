@@ -11,12 +11,17 @@ const Plots = () => {
   
   // State variables
   const { user } = UserAuth() || {};
-  const [dealerName, setDealerName] = useState("");
-  const [plotPrice, setPlotPrice] = useState("");
-  const [dealerPhoneNumber, setDealerPhoneNumber] = useState("");
-  const [plotSize, setPlotSize] = useState("");
+  const [area, setArea] = useState("")
+  const [dealer_name, setDealer_name] = useState("")
+  const [price, setPrice] = useState("")
+  const [contact_number, setContact_number] = useState("")
+  const [address, setAddress] = useState("")
+  // const [dealerName, setDealerName] = useState("");
+  // const [plotPrice, setPlotPrice] = useState("");
+  // const [dealerPhoneNumber, setDealerPhoneNumber] = useState("");
+  // const [plotSize, setPlotSize] = useState("");
   const [plotId, setPlotId] = useState("");
-  const [plotLocation, setPlotLocation] = useState("");
+  // const [plotLocation, setPlotLocation] = useState("");
   const [numberOfPlots, setNumberOfPlots] = useState(0);
 
   const handleSubmit = (e) => {
@@ -40,33 +45,33 @@ const Plots = () => {
     const currentDealerUserId = auth.currentUser.uid;
 
     //reference to the dealer's plots node in the database
-    const dealerPlotsRef = ref(db, `plots/${currentDealerUserId}`);
+    const dealerPlotsRef = ref(db, `plots/${plotId}`);
 
     //new unique key for the plot
-    const newPlotRef = push(dealerPlotsRef);
+    // const newPlotRef = push(dealerPlotsRef);
 
     //creating a new plot object
     const newPlot = {
-      dealerName,
-      plotPrice,
-      dealerPhoneNumber,
-      plotSize,
+      area,
+      dealer_name,
+      price,
+      contact_number,
       plotId,
-      plotLocation,
+      address,
     };
 
     //// Setting the new plot object at the new key
-    set(newPlotRef, newPlot);
+    set(dealerPlotsRef, newPlot);
 
     // set(ref(dealerPlotsRef, plotId), newPlot);
 
     // Clearing the form fields
-    setDealerName("");
-    setPlotPrice("");
-    setDealerPhoneNumber("");
-    setPlotSize("");
+    setArea("");
+    setDealer_name("");
+    setPrice("");
+    setContact_number("");
     setPlotId("");
-    setPlotLocation("");
+    setAddress("");
 
     window.alert("Plot added");
   }; 
@@ -76,7 +81,7 @@ const Plots = () => {
     const currentDealerUserId = auth.currentUser.uid;
 
     //reference to the dealer's plots node in the database
-    const dealerPlotsRef = ref(db, `plots/${currentDealerUserId}`);
+    const dealerPlotsRef = ref(db, `plots`);
 
     // Listening for changes to the dealer's plots node
     onValue(dealerPlotsRef, (snapshot) => {
@@ -84,8 +89,8 @@ const Plots = () => {
       const plotsData = snapshot.val() || {};
 
       // Converting the plots object to an array and storing it in state
-      const plotsArray = Object.entries(plotsData).map(([id, data]) => ({
-        id,
+      const plotsArray = Object.entries(plotsData).map(([plotId, data]) => ({
+        plotId,
         ...data,
       }));
       setPlots(plotsArray);
@@ -100,8 +105,11 @@ const Plots = () => {
 
   const handleDelete = (id) => {
     const currentDealerUserId = auth.currentUser.uid;
-    const dealerPlotsRef = ref(db, `plots/${currentDealerUserId}/${id}`);
+    const dealerPlotsRef = ref(db, `plots/${id}`);
     remove(dealerPlotsRef);
+
+    //removing the plots from the state array
+    // setPlots((prevPlots)=> prevPlots.filter((plot)=>plot.plotId !== id))
   };
 
   return (
@@ -218,10 +226,10 @@ const Plots = () => {
                 <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
                   <input
                     type="text"
-                    name="dealerName"
+                    name="dealer_name"
                     required
-                    value={dealerName}
-                    onChange={(e) => setDealerName(e.target.value)}
+                    value={dealer_name}
+                    onChange={(e) => setDealer_name(e.target.value)}
                     placeholder="Dealer Name"
                     style={{
                       border: "1px solid #c0c0c0",
@@ -236,10 +244,10 @@ const Plots = () => {
                   <br />
                   <input
                     type="number"
-                    name="dealerPhoneNumber"
+                    name="contact_number"
                     required
-                    value={dealerPhoneNumber}
-                    onChange={(e) => setDealerPhoneNumber(e.target.value)}
+                    value={contact_number}
+                    onChange={(e) => setContact_number(e.target.value)}
                     placeholder="Phone Number"
                     style={{
                       border: "1px solid #c0c0c0",
@@ -272,11 +280,11 @@ const Plots = () => {
                   <br />
                   <input
                     type="text"
-                    name="plotSize"
+                    name="area"
                     required
-                    value={plotSize}
-                    onChange={(e) => setPlotSize(e.target.value)}
-                    placeholder="Plot Size"
+                    value={area}
+                    onChange={(e) => setArea(e.target.value)}
+                    placeholder="Plot Size/Area"
                     style={{
                       border: "1px solid #c0c0c0",
                       borderRadius: "4px",
@@ -290,11 +298,11 @@ const Plots = () => {
                   <br />
                   <input
                     type="text"
-                    name="plotLocation"
+                    name="address"
                     required
-                    value={plotLocation}
-                    onChange={(e) => setPlotLocation(e.target.value)}
-                    placeholder="Location"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Location/Address"
                     style={{
                       border: "1px solid #c0c0c0",
                       borderRadius: "4px",
@@ -308,10 +316,10 @@ const Plots = () => {
                   <br />
                   <input
                     type="text"
-                    name="plotPrice"
+                    name="price"
                     required
-                    value={plotPrice}
-                    onChange={(e) => setPlotPrice(e.target.value)}
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                     placeholder="Plot Price"
                     style={{
                       border: "1px solid #c0c0c0",
@@ -376,18 +384,18 @@ const Plots = () => {
               </Typography>
               
               {plots.map((plot) => (
-                <div key={plot.id}>
+                <div key={plot.plotId}>
                   <input
                     type="checkbox"
-                    value={plot.id}
-                    onChange={(e) => handleDelete(e.target.value)}
+                    value={plot.plotId}
+                    onChange={() => handleDelete(plot.plotId)}
                   />
                   <span style={{padding: '5px'}}>{plot.plotId}</span>
-                  <span style={{padding: '5px'}}>{plot.dealerName}</span>
-                  <span style={{padding: '5px'}}>{plot.plotPrice}</span>
-                  <span style={{padding: '5px'}}>{plot.dealerPhoneNumber}</span>
-                  <span style={{padding: '5px'}}>{plot.plotSize}</span>
-                  <span style={{padding: '5px'}}>{plot.plotLocation}</span>
+                  <span style={{padding: '5px'}}>{plot.name}</span>
+                  <span style={{padding: '5px'}}>{plot.price}</span>
+                  <span style={{padding: '5px'}}>{plot.contact_number}</span>
+                  <span style={{padding: '5px'}}>{plot.area}</span>
+                  <span style={{padding: '5px'}}>{plot.address}</span>
                 </div>
               ))}
             </Paper>
