@@ -27,7 +27,7 @@ const SocietyDashboardPlots = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const snapshot = await get(ref(db, `plots/${user.uid}`));
+        const snapshot = await get(ref(db, `plots`));
         if (snapshot.exists()) {
           const plotsData = snapshot.val();
           const plots = Object.entries(plotsData).map(([uid, data]) => ({
@@ -44,7 +44,7 @@ const SocietyDashboardPlots = () => {
       }
     };
 
-    const dataRef = ref(db, `plots/${user.uid}`);
+    const dataRef = ref(db, `plots`);
     const unsubscribe = onValue(dataRef, () => {
       getData();
     });

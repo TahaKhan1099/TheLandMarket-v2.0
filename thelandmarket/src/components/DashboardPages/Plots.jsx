@@ -8,6 +8,7 @@ import { ref, onValue, push, set, remove } from "firebase/database";
 
 const Plots = () => {
  
+  
   // State variables
   const { user } = UserAuth() || {};
   const [dealerName, setDealerName] = useState("");
@@ -31,6 +32,10 @@ const Plots = () => {
   const [plots, setPlots] = useState([]); //setting it to Array instead of Obj to make the map function work
 
   const addPlot = () => {
+    if(!plotId){
+      window.alert("Please enter a Plot ID")
+      return;
+    }
     //ID of the currently signed-in dealer
     const currentDealerUserId = auth.currentUser.uid;
 
@@ -52,6 +57,8 @@ const Plots = () => {
 
     //// Setting the new plot object at the new key
     set(newPlotRef, newPlot);
+
+    // set(ref(dealerPlotsRef, plotId), newPlot);
 
     // Clearing the form fields
     setDealerName("");
