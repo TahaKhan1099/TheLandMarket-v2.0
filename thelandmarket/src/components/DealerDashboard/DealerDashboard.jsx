@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../Context/AuthContext";
-import { Container, Box, Button, Typography } from "@mui/material";
-import {motion} from "framer-motion";
 import SideNav from "../SideNav.jsx/SideNav";
 
 const DealerDashboard = () => {

@@ -288,23 +288,6 @@ const DealerRegDetails = () => {
                 <option value="Bahria Town Phase 3">Bahria Town Phase 3</option>
 							<option value="B-17">B-17</option>
               </select>
-              {/* <input
-                type="text"
-                name="societyName"
-                value={dealerData.societyName}
-							onChange={postDealerData}
-                required
-                placeholder="Society Name"
-                style={{
-                  border: "1px solid #c0c0c0",
-                  borderRadius: "4px",
-                  marginTop: "0.5rem",
-                  width: "280px",
-                  height: "30px",
-                  boxSizing: "border-box",
-                  textAlign: "center",
-                }}
-              /> */}
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
               <input
