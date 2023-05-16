@@ -26,6 +26,14 @@ import SocietyDashboardHome from "./components/SocietyDashboardPages/SocietyDash
 import SocietyDashboardDealers from "./components/SocietyDashboardPages/SocietyDashboardDealers";
 import SocietyDashboardPlots from "./components/SocietyDashboardPages/SocietyDashboardPlots";
 import SocietyDashboardSettings from "./components/SocietyDashboardPages/SocietyDashboardSettings";
+import DealerRegistrationBahria from "./components/DealerRegistrationBahria/DealerRegistrationBahria";
+import SocietyRegistrationD17 from "./components/SocietyRegistrationD17/SocietyRegistrationD17";
+import DealerRegDetailsBahria from "./components/DealerRegDetailsBahria/DealerRegDetailsBahria";
+import DealerDashboardBahria from "./components/DealerDashboardBahria/DealerDashboardBahria";
+import DashboardHomeBahria from "./components/DashboardPagesBahria/DashboardHomeBahria";
+import PlotsBahria from "./components/DashboardPagesBahria/PlotsBahria";
+import SettingsBahria from "./components/DashboardPagesBahria/SettingsBahria";
+import SocietyRegDetailsD17 from "./components/SocietyRegDetailsD17/SocietyRegDetailsD17";
 
 function App() {
   const location = useLocation();
@@ -48,6 +56,8 @@ function App() {
           <Route path="/societies" element={<Societies />} />
           <Route path="/dealerLogin" element={<DealerLogin />} />
           <Route path="/societyLogin" element={<SocietyLogin />} />
+          <Route path="/dealerRegistrationBahria" element={<DealerRegistrationBahria />} />
+          <Route path="/societyRegistrationD17" element={<SocietyRegistrationD17 />} />
           <Route path="/register" element={<Register />} />
           <Route path="/plotfinder" element={<PlotFinder />} />
           <Route path="/dealerRegistration" element={<DealerRegistration />} />
@@ -64,6 +74,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+           <Route
+            path="/dealerDashboardBahria"
+            element={
+              <ProtectedRoute>
+                <DealerDashboardBahria />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/societyDashboard"
@@ -74,10 +92,15 @@ function App() {
             }
           />
           <Route path="/dealerRegDetails" element={<DealerRegDetails />} />
+          <Route path="/dealerRegDetailsBahria" element={<DealerRegDetailsBahria />} />
           <Route path="/societyRegDetails" element={<SocietyRegDetails />} />
+          <Route path="/societyRegDetailsD17" element={<SocietyRegDetailsD17 />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/settingsBahria" element={<SettingsBahria />} />
           <Route path="/dashboardHome" element={<DashboardHome />} />
+          <Route path="/dashboardHomeBahria" element={<DashboardHomeBahria />} />
           <Route path="/plots" element={<Plots />} />
+          <Route path="/plotsBahria" element={<PlotsBahria />} />
           <Route path="/societyDashboardHome" element={<SocietyDashboardHome />} />
           <Route path="/societyDashboardDealers" element={<SocietyDashboardDealers />} />
           <Route path="/societyDashboardPlots" element={<SocietyDashboardPlots />} />

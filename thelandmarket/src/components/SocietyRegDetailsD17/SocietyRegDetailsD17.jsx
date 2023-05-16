@@ -1,104 +1,102 @@
 import React, { useState } from "react";
 import {
   Typography,
-  Grid,
   Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
   Container,
   Button,
 } from "@mui/material";
+import GoogleIcon from "@mui/icons-material/Google";
 import background from "../../assets/images/registration1.jpg";
 import { auth } from "../../firebase";
 
 import { useNavigate } from "react-router-dom";
 
-const DealerRegDetails = () => {
+const SocietyRegDetailsD17 = () => {
   const navigate = useNavigate();
-  const [dealerData, setDealerData] = useState({
+  const [societyData, setSocietyData] = useState({
     name: "",
-    age: "",
-    phoneNumber: "",
-    CNIC: "",
-    societyName: "",
-    agencyName: "",
-    officeAddress: "",
-    issuedEmployeeID: "",
-    officePhoneNumber: "",
+		city: "",
+		headOfficeAddress: "",
+		societyContactNumber: "",
+		focalPersonName: "",
+		focalPersonCNIC: "",
+		focalPersonEmail: "",
+		focalPersonPhoneNo: "",
   });
 
   let name, value;
-  const postDealerData = (event) =>{
+  const postSocietyData = (event) =>{
     name = event.target.name;
     value = event.target.value;
-    setDealerData({...dealerData, [name]: value}); //accessing dynamically
+    setSocietyData({...societyData, [name]: value});  //accessing it dynamically
   };
 
-  //connecting with Firebase
-  const submitDealerData = async (event) =>{
+  //connecting with firebase
+  const submitSocietyData = async (event) =>{
     event.preventDefault();
-    const {
+    const{
       name,
-			age,
-			phoneNumber,
-			CNIC,
-			societyName,
-			agencyName,
-			officeAddress,
-			issuedEmployeeID,
-			officePhoneNumber,
-    } = dealerData;
-
+			city,
+			headOfficeAddress,
+			societyContactNumber,
+			focalPersonName,
+			focalPersonCNIC,
+			focalPersonEmail,
+			focalPersonPhoneNo,
+    } = societyData;
     if(
       name &&
-			age &&
-			phoneNumber &&
-			CNIC &&
-			societyName &&
-			agencyName &&
-			officeAddress &&
-			issuedEmployeeID &&
-			officePhoneNumber
+			city &&
+			headOfficeAddress &&
+			societyContactNumber &&
+			focalPersonName &&
+			focalPersonCNIC &&
+			focalPersonEmail &&
+			focalPersonPhoneNo
     ) {
       const res = await fetch(
-        "https://tlm-auth-development-default-rtdb.firebaseio.com/DealerDataRecords.json",
+        "https://tlm-auth-development-default-rtdb.firebaseio.com/SocietyDataRecords.json",
         {
           method: "POST",
-          headers:{"content-type": "application/json",},
+          headers: {
+            "content-Type": "application/json",
+          },
           body: JSON.stringify({
             name,
-						age,
-						phoneNumber,
-						CNIC,
-						societyName,
-						agencyName,
-						officeAddress,
-						issuedEmployeeID,
-						officePhoneNumber,
+						city,
+						headOfficeAddress,
+						societyContactNumber,
+						focalPersonName,
+						focalPersonCNIC,
+						focalPersonEmail,
+						focalPersonPhoneNo,
 						userId: userId,
-          }), //making sure the data passed is in string
+          }),
         }
       );
-      if(res){
-        setDealerData({
+      if (res){
+        setSocietyData({
           name: "",
-					age: "",
-					phoneNumber: "",
-					CNIC: "",
-					societyName: "",
-					agencyName: "",
-					officeAddress: "",
-					issuedEmployeeID: "",
-					officePhoneNumber: "",
+					city: "",
+					headOfficeAddress: "",
+					societyContactNumber: "",
+					focalPersonName: "",
+					focalPersonCNIC: "",
+					focalPersonEmail: "",
+					focalPersonPhoneNo: "",
         });
         window.alert("Registered");
-        navigate("/dealerDashboard");
+        navigate("/societyDashboard");
       }
-      else{window.alert("Form Not Filled Completely");}
+      else{
+        window.alert("Form not Filled Completely");
+      }
     }
-    else{window.alert("Form Not Filled Completely");}
-  };
+    else{
+      window.alert("Form not Filled Completely");
+    }
+  }; 
+
   const currentUser = auth.currentUser;
   const userId = currentUser ? currentUser.uid : null;
 
@@ -134,13 +132,19 @@ const DealerRegDetails = () => {
             marginTop: "3%",
             borderRadius: "1rem",
             width: "45%",
-            height: "40rem",
+            height: '40rem'
+          },
+          "@media(max-width: 1200px)": {
+            marginTop: "3%",
+            borderRadius: "1rem",
+            width: "45%",
+            height: '40rem'
           },
           "@media(max-width: 600px)": {
             marginTop: "3%",
             borderRadius: "1rem",
             width: "45%",
-            height: "40rem",
+            height: '40rem'
           },
         }}
       >
@@ -152,14 +156,14 @@ const DealerRegDetails = () => {
             marginTop: "2rem",
             fontFamily: "Poppins",
             "@media(max-width: 800px)": {
-              fontSize: "1.5rem",
+              fontSize: '1.5rem'
             },
             "@media(max-width: 600px)": {
-              fontSize: "1rem",
+              fontSize: '1rem'
             },
           }}
         >
-          D-Registration Details
+          S-Registration Details
         </Typography>
         <Box
           sx={{
@@ -181,83 +185,105 @@ const DealerRegDetails = () => {
                   borderBottom: "1px solid #3A98B9",
                 }}
               >
-                Personal Information:
+                Society Information:
               </Typography>
               <br />
-              <input
+              <select
+                type="name"
+                name="name"
+                required
+                value={societyData.name}
+                onChange={postSocietyData}
+                style={{
+                  border: "1px solid #c0c0c0",
+                  borderRadius: "4px",
+                  marginTop: "0.5rem",
+                  width: "280px",
+                  height: "30px",
+                  boxSizing: "border-box",
+                  textAlign: "center",
+                }}
+              >
+                <option value="" disabled selected>
+                  Society Name:
+                </option>
+                <option value="D-17">D-17</option>
+              </select>
+              {/* <input
                 type="text"
                 name="name"
                 required
-                value={dealerData.name}
-                onChange={postDealerData}
-                placeholder="Name"
+                placeholder="Society Name"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
+                
                 }}
-              />
+                value={societyData.name}
+                onChange={postSocietyData}
+              /> */}
             </Box>
 
             <Box sx={{ marginTop: "0.2rem" }}>
-              <input
-                type="number"
-                name="age"
-                value={dealerData.age}
-							onChange={postDealerData}
+            <input
+                type="text"
+                name="city"
                 required
-                placeholder="Age"
+                placeholder="City"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.city}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
-              <input
-                type="number"
-                name="phoneNumber"
-                value={dealerData.phoneNumber}
-							onChange={postDealerData}
+            <input
+                type="text"
+                name="headOfficeAddress"
                 required
-                placeholder="Phone Number"
+                placeholder="Head Office Address"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.headOfficeAddress}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
-              <input
+            <input
                 type="number"
-                name="CNIC"
-                value={dealerData.CNIC}
-							onChange={postDealerData}
+                name="societyContactNumber"
                 required
-                placeholder="CNIC"
+                placeholder="Contact Number"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.societyContactNumber}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "1rem" }}>
@@ -270,118 +296,82 @@ const DealerRegDetails = () => {
                   borderBottom: "1px solid #3A98B9",
                 }}
               >
-                Organization Details:
+                Focal Person Details:
               </Typography>
               <br />
               <input
                 type="text"
-                name="societyName"
-                value={dealerData.societyName}
-                onChange={postDealerData}
+                name="focalPersonName"
                 required
-                disabled
-                placeholder="D-17"
-                style={{
-                  border: "1px solid #ffffff",
-                  borderRadius: "4px",
-                  marginTop: "0.5rem",
-                  width: "280px",
-                  height: "30px",
-                  boxSizing: "border-box",
-                  textAlign: "center",
-                  background: "#ffffff",
-                }}
-              />
-              {/* <select name="societyName" id="societyName" required 
-              value={dealerData.societyName} onChange={postDealerData} style={{
-                border: "1px solid #c0c0c0",
-                borderRadius: "4px",
-                marginTop: "0.5rem",
-                width: "280px",
-                height: "30px",
-                boxSizing: "border-box",
-                textAlign: "center",
-              }}
-              >
-                <option value="" disabled selected>Select Society Name:</option>
-                <option value="Bahria Town Phase 3">Bahria Town Phase 3</option>
-							<option value="B-17">B-17</option>
-              </select> */}
-            </Box>
-            <Box sx={{ marginTop: "0.2rem" }}>
-              <input
-                type="text"
-                name="agencyName"
-                value={dealerData.agencyName}
-							onChange={postDealerData}
-                required
-                placeholder="Agency Name"
+                placeholder="Focal Person Name"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonName}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
-              <input
-                type="text"
-                name="officeAddress"
-                value={dealerData.officeAddress}
-							onChange={postDealerData}
+            <input
+                type="number"
+                name="focalPersonCNIC"
                 required
-                placeholder="Office Address"
+                placeholder="Focal Person CNIC"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonCNIC}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
-              <input
+            <input
                 type="text"
-                name="issuedEmployeeID"
-                value={dealerData.issuedEmployeeID}
-							onChange={postDealerData}
+                name="focalPersonEmail"
                 required
-                placeholder="Office Issued Employee ID"
+                placeholder="Focal Person Email"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonEmail}
+                onChange={postSocietyData}
               />
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
-              <input
-                type="text"
-                name="officePhoneNumber"
-                value={dealerData.officePhoneNumber}
-							onChange={postDealerData}
+            <input
+                type="number"
+                name="focalPersonPhoneNo"
                 required
-                placeholder="Office Phone Number"
+                placeholder="Focal Person Contact Number"
                 style={{
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
-                  marginTop: "0.5rem",
+                  marginTop: '0.5rem',
                   width: "280px",
                   height: "30px",
                   boxSizing: "border-box",
                   textAlign: "center",
                 }}
+                value={societyData.focalPersonPhoneNo}
+                onChange={postSocietyData}
               />
             </Box>
             <Button
@@ -395,15 +385,16 @@ const DealerRegDetails = () => {
                 "&:hover": { color: "#3A98B9", backgroundColor: "#ffffff" },
               }}
               type="submit"
-              onClick={submitDealerData}
+              onClick={submitSocietyData}
             >
               SUBMIT
             </Button>
           </form>
         </Box>
+        
       </Box>
     </Container>
-  );
-};
+  )
+}
 
-export default DealerRegDetails;
+export default SocietyRegDetailsD17

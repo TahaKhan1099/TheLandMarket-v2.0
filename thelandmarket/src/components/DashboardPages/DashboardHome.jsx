@@ -64,7 +64,7 @@ const DashboardHome = () => {
             User Email: {user && user.email}
           </Typography>
           <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
-            (Society Name)
+            Society: D-17
           </Typography>
           <Typography sx={{ marginTop: "2rem", fontFamily: "Poppins" }}>
             (Agency Name)
