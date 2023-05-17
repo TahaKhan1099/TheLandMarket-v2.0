@@ -39,20 +39,27 @@ import PlotsBahria from "./components/DashboardPagesBahria/PlotsBahria";
 import SettingsBahria from "./components/DashboardPagesBahria/SettingsBahria";
 import SocietyRegDetailsD17 from "./components/SocietyRegDetailsD17/SocietyRegDetailsD17";
 import SocietyDashboardD17 from "./components/SocietyDashboardD17/SocietyDashboardD17";
+import AdminLogin from "./components/AdminLogin/AdminLogin";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import AdminDashboardHome from "./components/AdminDashboardPages/AdminDashboardHome";
+import AdminDashboardDealers from "./components/AdminDashboardPages/AdminDashboardDealers";
+import AdminDashboardPlots from "./components/AdminDashboardPages/AdminDashboardPlots";
+import AdminDashboardSociety from "./components/AdminDashboardPages/AdminDashboardSociety";
 
 function App() {
   const location = useLocation();
   const hideHeaderFooter =
     location.pathname.includes("/dealerDashboard") ||
-    location.pathname.includes("/societyDashboard");
+    location.pathname.includes("/societyDashboard") ||
+    location.pathname.includes("/adminDashboard");
 
   return (
     <>
       {hideHeaderFooter ? null : <Navbar />}
-
       <AuthContextProvider>
         <Routes>
-         
+          <Route path="/adminLogin" element={<AdminLogin />} />
+          <Route path="/adminDashboard" element={<AdminDashboard />} />
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -122,6 +129,10 @@ function App() {
           <Route path="/societyDashboardDealerD17" element={<SocietyDashboardDealerD17 />} />
           <Route path="/societyDashboardPlotsD17" element={<SocietyDashboardPlotsD17 />} />
           <Route path="/societyDashboardSettingsD17" element={<SocietyDashboardSettingsD17 />} />
+          <Route path="/adminDashboardHome" element={<AdminDashboardHome />} />
+          <Route path="/adminDashboardDealers" element={<AdminDashboardDealers />} />
+          <Route path="/adminDashboardPlots" element={<AdminDashboardPlots />} />
+          <Route path="/adminDashboardSocieties" element={<AdminDashboardSociety />} />
         </Routes>
       </AuthContextProvider>
       {hideHeaderFooter ? null : <Footer />}
