@@ -29,75 +29,77 @@ const DealerRegDetails = () => {
   });
 
   let name, value;
-  const postDealerData = (event) =>{
+  const postDealerData = (event) => {
     name = event.target.name;
     value = event.target.value;
-    setDealerData({...dealerData, [name]: value}); //accessing dynamically
+    setDealerData({ ...dealerData, [name]: value }); //accessing dynamically
   };
 
   //connecting with Firebase
-  const submitDealerData = async (event) =>{
+  const submitDealerData = async (event) => {
     event.preventDefault();
     const {
       name,
-			age,
-			phoneNumber,
-			CNIC,
-			societyName,
-			agencyName,
-			officeAddress,
-			issuedEmployeeID,
-			officePhoneNumber,
+      age,
+      phoneNumber,
+      CNIC,
+      societyName,
+      agencyName,
+      officeAddress,
+      issuedEmployeeID,
+      officePhoneNumber,
     } = dealerData;
 
-    if(
+    if (
       name &&
-			age &&
-			phoneNumber &&
-			CNIC &&
-			societyName &&
-			agencyName &&
-			officeAddress &&
-			issuedEmployeeID &&
-			officePhoneNumber
+      age &&
+      phoneNumber &&
+      CNIC &&
+      societyName &&
+      agencyName &&
+      officeAddress &&
+      issuedEmployeeID &&
+      officePhoneNumber
     ) {
       const res = await fetch(
         "https://tlm-auth-development-default-rtdb.firebaseio.com/DealerDataRecords.json",
         {
           method: "POST",
-          headers:{"content-type": "application/json",},
+          headers: { "content-type": "application/json" },
           body: JSON.stringify({
             name,
-						age,
-						phoneNumber,
-						CNIC,
-						societyName,
-						agencyName,
-						officeAddress,
-						issuedEmployeeID,
-						officePhoneNumber,
-						userId: userId,
+            age,
+            phoneNumber,
+            CNIC,
+            societyName,
+            agencyName,
+            officeAddress,
+            issuedEmployeeID,
+            officePhoneNumber,
+            userId: userId,
           }), //making sure the data passed is in string
         }
       );
-      if(res){
+      if (res) {
         setDealerData({
           name: "",
-					age: "",
-					phoneNumber: "",
-					CNIC: "",
-					societyName: "",
-					agencyName: "",
-					officeAddress: "",
-					issuedEmployeeID: "",
-					officePhoneNumber: "",
+          age: "",
+          phoneNumber: "",
+          CNIC: "",
+          societyName: "",
+          agencyName: "",
+          officeAddress: "",
+          issuedEmployeeID: "",
+          officePhoneNumber: "",
         });
         window.alert("Registered");
         navigate("/dealerDashboard");
+      } else {
+        window.alert("Form Not Filled Completely");
       }
-      else{window.alert("Form Not Filled Completely");}
+    } else {
+      window.alert("Form Not Filled Completely");
     }
-    else{window.alert("Form Not Filled Completely");}
   };
   const currentUser = auth.currentUser;
   const userId = currentUser ? currentUser.uid : null;
@@ -208,7 +210,7 @@ const DealerRegDetails = () => {
                 type="number"
                 name="age"
                 value={dealerData.age}
-							onChange={postDealerData}
+                onChange={postDealerData}
                 required
                 placeholder="Age"
                 style={{
@@ -227,7 +229,7 @@ const DealerRegDetails = () => {
                 type="number"
                 name="phoneNumber"
                 value={dealerData.phoneNumber}
-							onChange={postDealerData}
+                onChange={postDealerData}
                 required
                 placeholder="Phone Number"
                 style={{
@@ -246,7 +248,7 @@ const DealerRegDetails = () => {
                 type="number"
                 name="CNIC"
                 value={dealerData.CNIC}
-							onChange={postDealerData}
+                onChange={postDealerData}
                 required
                 placeholder="CNIC"
                 style={{
@@ -273,7 +275,7 @@ const DealerRegDetails = () => {
                 Organization Details:
               </Typography>
               <br />
-              <input
+              {/* <input
                 type="text"
                 name="societyName"
                 value={dealerData.societyName}
@@ -291,29 +293,36 @@ const DealerRegDetails = () => {
                   textAlign: "center",
                   background: "#ffffff",
                 }}
-              />
-              {/* <select name="societyName" id="societyName" required 
-              value={dealerData.societyName} onChange={postDealerData} style={{
-                border: "1px solid #c0c0c0",
-                borderRadius: "4px",
-                marginTop: "0.5rem",
-                width: "280px",
-                height: "30px",
-                boxSizing: "border-box",
-                textAlign: "center",
-              }}
+              /> */}
+              <select
+                name="societyName"
+                id="societyName"
+                required
+                value={dealerData.societyName}
+                onChange={postDealerData}
+                style={{
+                  border: "1px solid #c0c0c0",
+                  borderRadius: "4px",
+                  marginTop: "0.5rem",
+                  width: "280px",
+                  height: "30px",
+                  boxSizing: "border-box",
+                  textAlign: "center",
+                }}
               >
-                <option value="" disabled selected>Select Society Name:</option>
-                <option value="Bahria Town Phase 3">Bahria Town Phase 3</option>
-							<option value="B-17">B-17</option>
-              </select> */}
+                <option value="" disabled selected>
+                  Select Society Name:
+                </option>
+
+                <option value="D17">D17</option>
+              </select>
             </Box>
             <Box sx={{ marginTop: "0.2rem" }}>
               <input
                 type="text"
                 name="agencyName"
                 value={dealerData.agencyName}
-							onChange={postDealerData}
+                onChange={postDealerData}
                 required
                 placeholder="Agency Name"
                 style={{
@@ -332,7 +341,7 @@ const DealerRegDetails = () => {
                 type="text"
                 name="officeAddress"
                 value={dealerData.officeAddress}
-							onChange={postDealerData}
+                onChange={postDealerData}
                 required
                 placeholder="Office Address"
                 style={{
@@ -351,7 +360,7 @@ const DealerRegDetails = () => {
                 type="text"
                 name="issuedEmployeeID"
                 value={dealerData.issuedEmployeeID}
-							onChange={postDealerData}
+                onChange={postDealerData}
                 required
                 placeholder="Office Issued Employee ID"
                 style={{
@@ -370,7 +379,7 @@ const DealerRegDetails = () => {
                 type="text"
                 name="officePhoneNumber"
                 value={dealerData.officePhoneNumber}
-							onChange={postDealerData}
+                onChange={postDealerData}
                 required
                 placeholder="Office Phone Number"
                 style={{

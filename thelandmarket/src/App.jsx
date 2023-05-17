@@ -26,6 +26,10 @@ import SocietyDashboardHome from "./components/SocietyDashboardPages/SocietyDash
 import SocietyDashboardDealers from "./components/SocietyDashboardPages/SocietyDashboardDealers";
 import SocietyDashboardPlots from "./components/SocietyDashboardPages/SocietyDashboardPlots";
 import SocietyDashboardSettings from "./components/SocietyDashboardPages/SocietyDashboardSettings";
+import SocietyDashboardHomeD17 from "./components/SocietyDashboardPagesD17/SocietyDashboardHomeD17";
+import SocietyDashboardDealerD17 from "./components/SocietyDashboardPagesD17/SocietyDashboardDealerD17";
+import SocietyDashboardPlotsD17 from "./components/SocietyDashboardPagesD17/SocietyDashboardPlotsD17";
+import SocietyDashboardSettingsD17 from "./components/SocietyDashboardPagesD17/SocietyDashboardSettingsD17";
 import DealerRegistrationBahria from "./components/DealerRegistrationBahria/DealerRegistrationBahria";
 import SocietyRegistrationD17 from "./components/SocietyRegistrationD17/SocietyRegistrationD17";
 import DealerRegDetailsBahria from "./components/DealerRegDetailsBahria/DealerRegDetailsBahria";
@@ -34,6 +38,7 @@ import DashboardHomeBahria from "./components/DashboardPagesBahria/DashboardHome
 import PlotsBahria from "./components/DashboardPagesBahria/PlotsBahria";
 import SettingsBahria from "./components/DashboardPagesBahria/SettingsBahria";
 import SocietyRegDetailsD17 from "./components/SocietyRegDetailsD17/SocietyRegDetailsD17";
+import SocietyDashboardD17 from "./components/SocietyDashboardD17/SocietyDashboardD17";
 
 function App() {
   const location = useLocation();
@@ -91,6 +96,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+           <Route
+            path="/societyDashboardD17"
+            element={
+              <ProtectedRoute>
+                <SocietyDashboardD17 />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/dealerRegDetails" element={<DealerRegDetails />} />
           <Route path="/dealerRegDetailsBahria" element={<DealerRegDetailsBahria />} />
           <Route path="/societyRegDetails" element={<SocietyRegDetails />} />
@@ -105,6 +118,10 @@ function App() {
           <Route path="/societyDashboardDealers" element={<SocietyDashboardDealers />} />
           <Route path="/societyDashboardPlots" element={<SocietyDashboardPlots />} />
           <Route path="/societyDashboardSettings" element={<SocietyDashboardSettings />} />
+          <Route path="/societyDashboardHomeD17" element={<SocietyDashboardHomeD17 />} />
+          <Route path="/societyDashboardDealerD17" element={<SocietyDashboardDealerD17 />} />
+          <Route path="/societyDashboardPlotsD17" element={<SocietyDashboardPlotsD17 />} />
+          <Route path="/societyDashboardSettingsD17" element={<SocietyDashboardSettingsD17 />} />
         </Routes>
       </AuthContextProvider>
       {hideHeaderFooter ? null : <Footer />}

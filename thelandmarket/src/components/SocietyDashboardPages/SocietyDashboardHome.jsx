@@ -62,7 +62,7 @@ const SocietyDashboardHome = () => {
               
             }}
           >
-            Society Name Here
+            Society: Bahria Town Phase 3
           </Typography>
           <Typography sx={{ fontFamily: "Poppins", fontSize: "1rem" }}>
             Focal Person Name Here

@@ -86,7 +86,7 @@ const SocietyRegDetailsD17 = () => {
 					focalPersonPhoneNo: "",
         });
         window.alert("Registered");
-        navigate("/societyDashboard");
+        navigate("/societyDashboardD17");
       }
       else{
         window.alert("Form not Filled Completely");

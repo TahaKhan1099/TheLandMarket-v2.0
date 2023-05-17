@@ -17,8 +17,8 @@ import {
   Button,
 } from "@mui/material";
 
-const SocietyDashboardPlots = () => {
-  const currentDealerUserId = auth.currentUser.uid;
+const SocietyDashboardPlotsD17 = () => {
+    const currentDealerUserId = auth.currentUser.uid;
     const { user } = UserAuth();
     const [values, setValues] = useState([]);
     const [selectedPlots, setSelectedPlots] = useState([]);
@@ -27,26 +27,20 @@ const SocietyDashboardPlots = () => {
     useEffect(() => {
       const getData = async () => {
         try {
-          const snapshot = await get(ref(db, `bahria_phase3`));
+          const snapshot = await get(ref(db, `plots`));
           if (snapshot.exists()) {
             const plotsData = snapshot.val();
-            // const plots = Object.entries(plotsData).map(([uid, data]) => ({
-            //   uid,
-            //   ...data,
-            // }));
+          
             const plots = Object.values(plotsData);
             setValues(plots);
-            // const filteredPlots = plots.filter(
-            //   (plot) => plot.plotLocation === "Bahria Town Phase 3"
-            // );
-            // setValues(filteredPlots);
+         
           }
         } catch (error) {
           console.log("Error Fetching Plots: ", error);
         }
       };
   
-      const dataRef = ref(db, `bahria_phase3`);
+      const dataRef = ref(db, `plots`);
       const unsubscribe = onValue(dataRef, () => {
         getData();
       });
@@ -55,6 +49,30 @@ const SocietyDashboardPlots = () => {
         unsubscribe();
       };
     }, [db]);
+
+    const handlePlotSelection = (plotId) => {
+        const updateSelectedPlots = [...selectedPlots];
+        if (updateSelectedPlots.includes(plotId)){
+            const index = updateSelectedPlots.indexOf(plotId);
+            updateSelectedPlots.splice(index, 1);
+
+        }else {
+            updateSelectedPlots.push(plotId);
+        }
+        setSelectedPlots(updateSelectedPlots);
+    }
+
+    const handleRemovePlots = () =>{
+        selectedPlots.forEach(async(plotId)=>{
+            try{
+                await remove(ref(db, `plots/${plotId}`));
+                console.log(`Plot with ID ${plotId} removed successfully.`);
+
+            } catch(error){
+                console.log(`Error removing plot with ID ${plotId}:`, error);
+            }
+        });
+    }
   
     return (
       <Container maxWidth="xl">
@@ -92,7 +110,10 @@ const SocietyDashboardPlots = () => {
                 {values.map((value) => (
                   <TableRow key={value.uid}>
                     <TableCell>
-                      <Checkbox />
+                      <Checkbox 
+                        checked={selectedPlots.includes(value.plotId)}
+                        onChange={()=>handlePlotSelection(value.plotId)}
+                      />
                     </TableCell>
                     <TableCell>{value.plotId}</TableCell>
                     <TableCell>{value.dealer_name}</TableCell>
@@ -104,13 +125,13 @@ const SocietyDashboardPlots = () => {
                 ))}
               </TableBody>
             </Table>
-            <Box sx={{justifyContent: 'center', alignItems: 'center'}}>
-              <Button variant="container" disabled>Remove</Button>
+            <Box sx={{justifyContent: 'center', alignItems: 'center', display: 'flex', marginTop: '1rem', marginBottom: '1rem'}}>
+              <Button variant="container" onClick={handleRemovePlots}>Remove</Button>
             </Box>
           </TableContainer>
         </Box>
       </Container>
     );
-};
+}
 
-export default SocietyDashboardPlots;
+export default SocietyDashboardPlotsD17
