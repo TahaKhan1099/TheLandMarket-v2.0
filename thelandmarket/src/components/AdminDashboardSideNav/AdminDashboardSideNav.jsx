@@ -116,7 +116,7 @@ const AdminDashboardSideNav = () => {
     navigate("/");
   };
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [menuData, setMenuData] = useState("adminDashboardHome");
 
   const handleDrawerOpen = () => {
@@ -153,11 +153,10 @@ const AdminDashboardSideNav = () => {
               /> */}
             <Box
               sx={{
-                marginLeft: '2rem',
-                padding: '1.5%'
+                padding: '1%'
               }}
             >
-              <Typography sx={{fontSize: '1.2rem'}}>ADMIN</Typography>
+              <Typography sx={{fontSize: '1.2rem'}}>ADMIN DASHBOARD</Typography>
             </Box>
 
             <Box sx={{ marginLeft: "auto", display: "flex" }}>
