@@ -100,7 +100,7 @@ const SocietyLoginD17 = () => {
               <input
                   type="email"
                   required
-                  placeholder="Enter Your Email"
+                  placeholder="Enter Your Email:"
                   style={{
                     border: "1px solid #c0c0c0",
                     borderRadius: "4px",
