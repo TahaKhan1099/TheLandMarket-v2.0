@@ -72,9 +72,6 @@ const DealerLogin = () => {
            },
         }}
       >
-        {/* <Box>
-          <img src="/src/assets/images/logoNew.PNG" width={60} />
-        </Box> */}
         <Typography
           sx={{
             color: "#3A98B9",

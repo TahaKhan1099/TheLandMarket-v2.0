@@ -22,6 +22,7 @@ import Poster1 from "../../assets/images/DHAIsbPoster.jpg";
 import Poster2 from "../../assets/images/GulbergPoster.webp";
 import Poster3 from "../../assets/images/ParkViewCityPoster.png";
 import Carousel from "react-bootstrap/Carousel";
+import PVC from "../../assets/images/ParkViewCityPoster.png"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -106,6 +107,9 @@ const Home = () => {
         <Typography variant="h3" sx={{ textAlign: "center", mt: "10rem" }}>
           Our Popular Residence
         </Typography>
+        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3rem'}}>
+              <img src={PVC} alt="#" style={{width: '100%', height: 'auto'}}/>
+        </Box>
         <Box>
           {/* <Carousel fade>
               <Carousel.Item>
@@ -123,7 +127,7 @@ const Home = () => {
             </Carousel> */}
         </Box>
       </Box>
-      <Typography variant="h4" mt="150px" align="center">
+      <Typography variant="h4" mt="100px" align="center">
         How it Works?
       </Typography>
       <Box

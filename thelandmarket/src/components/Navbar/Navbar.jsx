@@ -51,10 +51,10 @@ const Navbar = () => {
     navigate("/societies");
   };
   const NTDealerLogin = () => {
-    navigate("/dealerLogin");
+    navigate("/login");
   };
   const NTSocietyLogin = () => {
-    navigate("/societyLogin");
+    navigate("/loginSociety");
   };
   const NTPlotFinder = () => {
     navigate("/plotfinder");
@@ -200,7 +200,7 @@ const Navbar = () => {
                       onClick={NTDealerLogin}
                     >
                       DEALER
-                      
+
                     </Button>
                     {handleClose}
                   </Box>

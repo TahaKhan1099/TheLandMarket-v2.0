@@ -10,6 +10,7 @@ import DealerLogin from "./components/DealerLogin/DealerLogin";
 import SocietyLogin from "./components/SocietyLogin/SocietyLogin";
 import Register from "./components/Register/Register";
 import PlotFinder from "./components/PlotFinder/PlotFinder";
+import Login from "./components/Login/Login";
 import DealerRegistration from "./components/DealerRegistration/DealerRegistration";
 import SocietyRegistration from "./components/SocietyRegistration/SocietyRegistration";
 import DealerDashboard from "./components/DealerDashboard/DealerDashboard";
@@ -45,6 +46,9 @@ import AdminDashboardHome from "./components/AdminDashboardPages/AdminDashboardH
 import AdminDashboardDealers from "./components/AdminDashboardPages/AdminDashboardDealers";
 import AdminDashboardPlots from "./components/AdminDashboardPages/AdminDashboardPlots";
 import AdminDashboardSociety from "./components/AdminDashboardPages/AdminDashboardSociety";
+import DealerLoginBahria from "./components/DealerLoginBahria/DealerLoginBahria";
+import LoginSociety from "./components/LoginSociety/LoginSociety";
+import SocietyLoginD17 from "./components/SocietyLoginD17/SocietyLoginD17";
 
 function App() {
   const location = useLocation();
@@ -62,10 +66,14 @@ function App() {
           <Route path="/adminDashboard" element={<AdminDashboard />} />
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/societyLoginD17" element={<SocietyLoginD17 />} />
+          <Route path="/loginSociety" element={<LoginSociety />} />
           <Route path="/about" element={<About />} />
           <Route path="/discover" element={<Discover />} />
           <Route path="/dashboards" element={<Dashboards />} />
           <Route path="/societies" element={<Societies />} />
+          <Route path="/dealerLoginBahria" element={<DealerLoginBahria />} />
           <Route path="/dealerLogin" element={<DealerLogin />} />
           <Route path="/societyLogin" element={<SocietyLogin />} />
           <Route path="/dealerRegistrationBahria" element={<DealerRegistrationBahria />} />
