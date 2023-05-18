@@ -41,7 +41,7 @@ const AdminDashboardPlots = () => {
             setValues(allPlots);
           }
         } catch (error) {
-          console.log("Error Fetching Plots ", error);
+          console.log("Error Fetching Plots: ", error);
         }
       };
   
