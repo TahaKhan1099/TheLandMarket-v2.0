@@ -61,7 +61,7 @@ const AdminLogin = () => {
           console.log("Admin Logged in Successful");
           navigate("/adminDashboard");
         } else {
-          window.alert("Invalid Email/Password");
+          window.alert("Invalid Email or Password");
         }
       })
       .catch((error) => {
