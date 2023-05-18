@@ -108,7 +108,7 @@ const AdminDashboardHome = () => {
                   display: "inline-flex",
                 }}
               >
-                Total Dealers:{" "}
+                Total Dealers :{" "}
                 <Typography
                   sx={{
                     marginLeft: "1rem",
