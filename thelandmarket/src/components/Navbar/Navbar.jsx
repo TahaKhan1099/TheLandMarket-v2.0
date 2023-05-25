@@ -131,7 +131,7 @@ const Navbar = () => {
                 "&:hover": { textDecoration: "underline #3A98B9" },
               }}
             />
-            <Tab
+            {/* <Tab
               label="Plot-Finder"
               onClick={NTPlotFinder}
               sx={{
@@ -141,7 +141,7 @@ const Navbar = () => {
                 marginTop: "0.5rem",
                 "&:hover": { textDecoration: "underline #3A98B9" },
               }}
-            />
+            /> */}
           </Tabs>
 
          
